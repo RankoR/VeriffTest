@@ -8,7 +8,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
-    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -19,16 +19,6 @@ android {
         targetSdk = BuildVersions.TARGET_SDK_VERSION
 
         addVersionsToBuildConfig()
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true",
-                    "room.expandProjection" to "true"
-                )
-            }
-        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

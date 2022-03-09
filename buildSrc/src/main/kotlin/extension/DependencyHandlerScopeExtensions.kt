@@ -21,6 +21,12 @@ private fun DependencyHandler.androidTestImplementation(dependencyNotation: Stri
     return add("androidTestImplementation", dependencyNotation)
 }
 
+fun DependencyHandlerScope.addHilt() {
+    implementation(Dependencies.Libraries.HILT_ANDROID)
+    kapt(Dependencies.Libraries.HILT_COMPILER)
+    kapt(Dependencies.Libraries.HILT_ANDROID_COMPILER)
+}
+
 fun DependencyHandlerScope.addCoreTestLibraries() {
     testImplementation(Dependencies.Libraries.JUNIT)
     androidTestImplementation(Dependencies.Libraries.ANDROIDX_TEST_CORE)

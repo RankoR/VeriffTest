@@ -24,16 +24,6 @@ android {
 
         addVersionsToBuildConfig()
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true",
-                    "room.expandProjection" to "true"
-                )
-            }
-        }
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -86,12 +76,14 @@ android {
 }
 
 dependencies {
+    implementation(projects.sdk)
+
     implementation(Dependencies.Libraries.KOTLIN_STD_LIB)
     implementation(Dependencies.Libraries.ANDROID_X_CORE_KTX)
 
     // Coroutines
-    api(Dependencies.Libraries.COROUTINES_CORE)
-    api(Dependencies.Libraries.COROUTINES_ANDROID)
+    implementation(Dependencies.Libraries.COROUTINES_CORE)
+    implementation(Dependencies.Libraries.COROUTINES_ANDROID)
 
     // AndroidX
     implementation(Dependencies.Libraries.ANDROID_X_APPCOMPAT)

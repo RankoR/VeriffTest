@@ -20,9 +20,13 @@ private object Dependencies {
         const val GRADLE_VERSIONS = "com.github.ben-manes:gradle-versions-plugin:${Versions.GRADLE_VERSIONS}"
         const val SPOTLESS = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.SPOTLESS}"
 
+        const val HILT = "com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT}"
+
         private object Versions {
             const val TOOLS_GRADLE = "7.0.4"
             const val KOTLIN = "1.6.10"
+
+            const val HILT = "2.41"
 
             const val GRADLE_VERSIONS = "0.39.0"
             const val SPOTLESS = "5.16.0"
@@ -36,4 +40,6 @@ dependencies {
 
     implementation(Dependencies.BuildScript.SPOTLESS)
     implementation(Dependencies.BuildScript.GRADLE_VERSIONS)
+
+    implementation(Dependencies.BuildScript.HILT)
 }
