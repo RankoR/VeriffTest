@@ -11,8 +11,10 @@ dependencyResolutionManagement {
 }
 
 include(
-    ":app",
-    ":sdk"
+    ":core",
+    ":sdk",
+
+    ":app"
 )
 
 rootProject.name = "VeriffTest"

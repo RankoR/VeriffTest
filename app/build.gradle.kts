@@ -76,14 +76,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core)
     implementation(projects.sdk)
-
-    implementation(Dependencies.Libraries.KOTLIN_STD_LIB)
-    implementation(Dependencies.Libraries.ANDROID_X_CORE_KTX)
-
-    // Coroutines
-    implementation(Dependencies.Libraries.COROUTINES_CORE)
-    implementation(Dependencies.Libraries.COROUTINES_ANDROID)
 
     // AndroidX
     implementation(Dependencies.Libraries.ANDROID_X_APPCOMPAT)

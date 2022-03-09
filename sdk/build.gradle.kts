@@ -6,6 +6,8 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.core)
+
     // Hilt
     addHilt()
 
