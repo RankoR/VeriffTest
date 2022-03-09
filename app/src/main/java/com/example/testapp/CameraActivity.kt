@@ -18,8 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.TextRecognizerOptions
-import kotlinx.android.synthetic.main.activity_camera.*
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.concurrent.ExecutorService
@@ -30,7 +29,6 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +44,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         // Set up the listener for take photo button
-        camera_capture_button.setOnClickListener { takePhoto() }
+//        camera_capture_button.setOnClickListener { takePhoto() }
 
         outputDirectory = getOutputDirectory()
 
@@ -98,13 +96,14 @@ class CameraActivity : AppCompatActivity() {
                             e.printStackTrace()
                         }
                 }
-            })
+            }
+        )
     }
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
@@ -112,7 +111,7 @@ class CameraActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(viewFinder.surfaceProvider)
+//                    it.setSurfaceProvider(viewFinder.surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder()
@@ -129,41 +128,39 @@ class CameraActivity : AppCompatActivity() {
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture
                 )
-
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
-
         }, ContextCompat.getMainExecutor(this))
-    }
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all { p ->
-        ContextCompat.checkSelfPermission(
-            baseContext, p
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun getOutputDirectory(): File {
-        val mediaDir = externalMediaDirs.firstOrNull()?.let {
-            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
         }
-        return if (mediaDir != null && mediaDir.exists())
-            mediaDir else filesDir
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraExecutor.shutdown()
-    }
+        private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all { p ->
+            ContextCompat.checkSelfPermission(
+                baseContext, p
+            ) == PackageManager.PERMISSION_GRANTED
+        }
 
-    companion object {
-        private const val TAG = "CameraXBasic"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private fun getOutputDirectory(): File {
+            val mediaDir = externalMediaDirs.firstOrNull()?.let {
+                File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+            }
+            return if (mediaDir != null && mediaDir.exists())
+                mediaDir else filesDir
+        }
 
-        fun start(context: Context) {
-            context.startActivity(Intent(context, CameraActivity::class.java))
+        override fun onDestroy() {
+            super.onDestroy()
+            cameraExecutor.shutdown()
+        }
+
+        companion object {
+            private const val TAG = "CameraXBasic"
+            private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+            private const val REQUEST_CODE_PERMISSIONS = 10
+            private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
+            fun start(context: Context) {
+                context.startActivity(Intent(context, CameraActivity::class.java))
+            }
         }
     }
-}
