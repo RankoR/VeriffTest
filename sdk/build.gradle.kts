@@ -3,6 +3,7 @@ import extension.addHilt
 
 plugins {
     `base-lib`
+    id("com.google.dagger.hilt.android")
 }
 
 dependencies {

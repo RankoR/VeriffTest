@@ -1,6 +1,5 @@
 import dependency.Dependencies
 import extension.addCoreTestLibraries
-import extension.addHilt
 
 plugins {
     `base-lib`
@@ -12,11 +11,11 @@ dependencies {
     api(Dependencies.Libraries.ANDROID_X_CORE_KTX)
 
     // Coroutines
-    implementation(Dependencies.Libraries.COROUTINES_CORE)
-    implementation(Dependencies.Libraries.COROUTINES_ANDROID)
+    api(Dependencies.Libraries.COROUTINES_CORE)
+    api(Dependencies.Libraries.COROUTINES_ANDROID)
 
-    // Hilt
-    addHilt()
+    // Timber
+    api(Dependencies.Libraries.TIMBER)
 
     // Tests
     addCoreTestLibraries()

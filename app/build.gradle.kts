@@ -80,13 +80,6 @@ dependencies {
     implementation(projects.coreUi)
     implementation(projects.sdk)
 
-    // AndroidX
-    implementation(Dependencies.Libraries.ANDROID_X_APPCOMPAT)
-    implementation(Dependencies.Libraries.ANDROID_X_CONSTRAINT_LAYOUT)
-
-    // Material
-    implementation(Dependencies.Libraries.GOOGLE_MATERIAL)
-
     // CameraX
     implementation(Dependencies.Libraries.CAMERA_X)
     implementation(Dependencies.Libraries.CAMERA_X_LIFECYCLE)
