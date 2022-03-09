@@ -31,11 +31,9 @@ private fun DependencyHandler.androidTestImplementation(projectDependency: Proje
     return add("androidTestImplementation", projectDependency)
 }
 
-fun DependencyHandlerScope.addHilt() {
-    implementation(Dependencies.Libraries.HILT_ANDROID)
-    kapt(Dependencies.Libraries.HILT_COMPILER)
-    kapt(Dependencies.Libraries.HILT_ANDROID_COMPILER)
-    kapt(Dependencies.Libraries.ANDROID_X_HILT_COMPILER)
+fun DependencyHandlerScope.addDagger() {
+    implementation(Dependencies.Libraries.DAGGER)
+    kapt(Dependencies.Libraries.DAGGER_COMPILER)
 }
 
 fun DependencyHandlerScope.addCoreTestLibraries() {

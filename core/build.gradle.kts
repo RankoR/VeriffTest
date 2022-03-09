@@ -1,10 +1,9 @@
 import dependency.Dependencies
 import extension.addCoreTestLibraries
-import extension.addHilt
+import extension.addDagger
 
 plugins {
     `base-lib`
-    id("com.google.dagger.hilt.android")
 }
 
 dependencies {
@@ -20,7 +19,7 @@ dependencies {
     api(Dependencies.Libraries.TIMBER)
 
     // Hilt
-    addHilt()
+    addDagger()
 
     // Tests
     addCoreTestLibraries()

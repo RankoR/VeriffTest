@@ -12,11 +12,9 @@ object Dependencies {
         const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINES}"
         const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}"
 
-        // Hilt
-        const val HILT_ANDROID = "com.google.dagger:hilt-android:${Versions.HILT}"
-        const val HILT_COMPILER = "com.google.dagger:hilt-compiler:${Versions.HILT}"
-        const val HILT_ANDROID_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.HILT}"
-        const val ANDROID_X_HILT_COMPILER = "androidx.hilt:hilt-compiler:${Versions.ANDROID_X_HILT}"
+        // Dagger
+        const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER}"
+        const val DAGGER_COMPILER = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
 
         // AndroidX
         const val ANDROID_X_CORE_KTX = "androidx.core:core-ktx:${Versions.ANDROID_X_CORE_KTX}"
@@ -64,7 +62,7 @@ object Dependencies {
 
             const val COROUTINES = "1.6.0"
 
-            const val HILT = "2.41"
+            const val DAGGER = "2.41"
             const val ANDROID_X_HILT = "1.0.0"
 
             // AndroidX

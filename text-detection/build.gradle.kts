@@ -1,10 +1,9 @@
 import dependency.Dependencies
 import extension.addCoreTestLibraries
-import extension.addHilt
+import extension.addDagger
 
 plugins {
     `base-lib`
-    id("com.google.dagger.hilt.android")
 }
 
 dependencies {
@@ -14,7 +13,7 @@ dependencies {
     implementation(Dependencies.Libraries.ML_KIT_TEXT_RECOGNITION)
 
     // Hilt
-    addHilt()
+    addDagger()
 
     // Tests
     addCoreTestLibraries()

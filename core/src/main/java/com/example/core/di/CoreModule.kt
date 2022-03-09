@@ -1,12 +1,12 @@
 package com.example.core.di
 
+import android.app.Application
+import android.content.Context
 import com.example.core.domain.IsDebug
 import com.example.core.domain.IsDebugImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
@@ -14,8 +14,14 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
-class CoreModule {
+class CoreModule(
+    private val application: Application
+) {
+
+    @Provides
+    @Singleton
+    @Named(APPLICATION_CONTEXT)
+    fun provideApplicationContext(): Context = application
 
     @Provides
     @Reusable

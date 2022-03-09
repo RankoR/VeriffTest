@@ -11,11 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
+import com.example.core_ui.util.FragmentInflate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<VB : ViewBinding>(
-    private val inflate: Inflate<VB>
+    private val inflate: FragmentInflate<VB>
 ) : Fragment() {
 
     protected var binding: VB? = null
@@ -78,5 +79,3 @@ abstract class BaseFragment<VB : ViewBinding>(
         }
     }
 }
-
-typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
