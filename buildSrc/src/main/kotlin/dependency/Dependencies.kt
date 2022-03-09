@@ -41,18 +41,20 @@ object Dependencies {
         // CameraX
         const val CAMERA_X = "androidx.camera:camera-camera2:${Versions.CAMERA_X}"
         const val CAMERA_X_LIFECYCLE = "androidx.camera:camera-lifecycle:${Versions.CAMERA_X}"
-        const val CAMERA_X_VIEW ="androidx.camera:camera-view:${Versions.CAMERA_X_VIEW}"
+        const val CAMERA_X_VIEW = "androidx.camera:camera-view:${Versions.CAMERA_X_VIEW}"
 
         // ML Kit
         const val ML_KIT_TEXT_RECOGNITION = "com.google.mlkit:text-recognition:${Versions.ML_KIT}"
 
         // Test
         const val JUNIT = "junit:junit:${Versions.JUNIT}"
+        const val KOTLIN_TEST = "org.jetbrains.kotlin:kotlin-test:${Versions.KOTLIN}"
         const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINES}"
         const val ANDROIDX_TEST_CORE = "androidx.test:core:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_RUNNER = "androidx.test:runner:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_RULES = "androidx.test:rules:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_EXT_JUNIT = "androidx.test.ext:junit:${Versions.ANDROIDX_TEST_EXT_JUNIT}"
+        const val CORE_TESTS = ":core-tests"
 
         /**
          * Versions

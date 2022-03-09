@@ -2,8 +2,10 @@ package extension
 
 import dependency.Dependencies
 import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.DependencyHandlerScope
+import org.gradle.kotlin.dsl.project
 
 private fun DependencyHandler.implementation(dependencyNotation: String): Dependency? {
     return add("implementation", dependencyNotation)
@@ -19,6 +21,14 @@ private fun DependencyHandler.testImplementation(dependencyNotation: String): De
 
 private fun DependencyHandler.androidTestImplementation(dependencyNotation: String): Dependency? {
     return add("androidTestImplementation", dependencyNotation)
+}
+
+private fun DependencyHandler.testImplementation(projectDependency: ProjectDependency): Dependency? {
+    return add("testImplementation", projectDependency)
+}
+
+private fun DependencyHandler.androidTestImplementation(projectDependency: ProjectDependency): Dependency? {
+    return add("androidTestImplementation", projectDependency)
 }
 
 fun DependencyHandlerScope.addHilt() {
@@ -37,4 +47,10 @@ fun DependencyHandlerScope.addCoreTestLibraries() {
 
     testImplementation(Dependencies.Libraries.COROUTINES_TEST)
     androidTestImplementation(Dependencies.Libraries.COROUTINES_TEST)
+
+    testImplementation(Dependencies.Libraries.KOTLIN_TEST)
+    androidTestImplementation(Dependencies.Libraries.KOTLIN_TEST)
+
+    testImplementation(project(Dependencies.Libraries.CORE_TESTS))
+    androidTestImplementation(project(Dependencies.Libraries.CORE_TESTS))
 }
