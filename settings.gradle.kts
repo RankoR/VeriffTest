@@ -12,6 +12,7 @@ dependencyResolutionManagement {
 
 include(
     ":core",
+    ":core-ui",
     ":sdk",
 
     ":app"

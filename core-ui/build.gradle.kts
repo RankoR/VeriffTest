@@ -1,3 +1,4 @@
+
 import extension.addCoreTestLibraries
 import extension.addHilt
 
@@ -7,7 +8,6 @@ plugins {
 
 dependencies {
     implementation(projects.core)
-    implementation(projects.coreUi)
 
     // Hilt
     addHilt()

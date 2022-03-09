@@ -77,6 +77,7 @@ android {
 
 dependencies {
     implementation(projects.core)
+    implementation(projects.coreUi)
     implementation(projects.sdk)
 
     // AndroidX
