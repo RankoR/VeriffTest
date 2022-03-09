@@ -13,6 +13,7 @@ dependencyResolutionManagement {
 include(
     ":core",
     ":core-ui",
+    ":text-detection",
     ":sdk",
 
     ":app"

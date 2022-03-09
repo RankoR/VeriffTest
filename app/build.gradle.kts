@@ -76,17 +76,16 @@ android {
 }
 
 dependencies {
+    // TODO: Remove unnecessary modules from here
     implementation(projects.core)
     implementation(projects.coreUi)
+    implementation(projects.textDetection)
     implementation(projects.sdk)
 
     // CameraX
     implementation(Dependencies.Libraries.CAMERA_X)
     implementation(Dependencies.Libraries.CAMERA_X_LIFECYCLE)
     implementation(Dependencies.Libraries.CAMERA_X_VIEW)
-
-    // ML Kit
-    implementation(Dependencies.Libraries.ML_KIT_TEXT_RECOGNITION)
 
     // Tests
     addCoreTestLibraries()

@@ -1,3 +1,4 @@
+import dependency.Dependencies
 import extension.addCoreTestLibraries
 import extension.addHilt
 
@@ -8,8 +9,9 @@ plugins {
 
 dependencies {
     implementation(projects.core)
-    implementation(projects.coreUi)
-    implementation(projects.textDetection)
+
+    // ML Kit
+    implementation(Dependencies.Libraries.ML_KIT_TEXT_RECOGNITION)
 
     // Hilt
     addHilt()

@@ -4,21 +4,18 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+// import com.google.mlkit.vision.common.InputImage
+// import com.google.mlkit.vision.text.TextRecognition
+// import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.concurrent.ExecutorService
@@ -71,33 +68,33 @@ class CameraActivity : AppCompatActivity() {
 
         // Set up image capture listener, which is triggered after photo has
         // been taken
-        imageCapture!!.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
-                }
-
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = Uri.fromFile(photoFile)
-                    Log.d(TAG, "Photo capture succeeded: $savedUri")
-                    Toast.makeText(baseContext, "Photo captured, reading text", Toast.LENGTH_SHORT)
-                        .show()
-                    val image: InputImage = InputImage.fromFilePath(this@CameraActivity, savedUri)
-                    val recognizer =
-                        TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-                    val result = recognizer.process(image)
-                        .addOnSuccessListener { visionText ->
-                            Toast.makeText(baseContext, visionText.text, Toast.LENGTH_SHORT).show()
-                            Log.d(TAG, visionText.text)
-                        }
-                        .addOnFailureListener { e ->
-                            e.printStackTrace()
-                        }
-                }
-            }
-        )
+//        imageCapture!!.takePicture(
+//            outputOptions,
+//            ContextCompat.getMainExecutor(this),
+//            object : ImageCapture.OnImageSavedCallback {
+//                override fun onError(exc: ImageCaptureException) {
+//                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+//                }
+//
+//                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+//                    val savedUri = Uri.fromFile(photoFile)
+//                    Log.d(TAG, "Photo capture succeeded: $savedUri")
+//                    Toast.makeText(baseContext, "Photo captured, reading text", Toast.LENGTH_SHORT)
+//                        .show()
+//                    val image: InputImage = InputImage.fromFilePath(this@CameraActivity, savedUri)
+//                    val recognizer =
+//                        TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+//                    val result = recognizer.process(image)
+//                        .addOnSuccessListener { visionText ->
+//                            Toast.makeText(baseContext, visionText.text, Toast.LENGTH_SHORT).show()
+//                            Log.d(TAG, visionText.text)
+//                        }
+//                        .addOnFailureListener { e ->
+//                            e.printStackTrace()
+//                        }
+//                }
+//            }
+//        )
     }
 
     private fun startCamera() {
