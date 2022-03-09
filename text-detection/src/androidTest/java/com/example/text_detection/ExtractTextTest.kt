@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.core_tests.assertThrows
 import com.example.core_tests.awaitSingle
+import com.example.text_detection.data.model.RawDocumentData
 import com.example.text_detection.domain.ExtractText
 import com.example.text_detection.domain.ExtractTextImpl
 import com.example.text_detection.domain.exception.NoTextFoundException
@@ -27,8 +28,8 @@ class ExtractTextTest {
         runTest {
             extractText
                 .exec(idBitmap, 0)
-                .awaitSingle { lines ->
-                    assertEquals(lines.toString(), 24, lines.size)
+                .awaitSingle { data ->
+                    assertEquals(data.toString(), 24, data.lineCount)
                 }
         }
     }
@@ -40,8 +41,8 @@ class ExtractTextTest {
         runTest {
             extractText
                 .exec(idBitmap, 0)
-                .awaitSingle { lines ->
-                    assertEquals(lines.toString(), 24, lines.size)
+                .awaitSingle { data ->
+                    assertEquals(data.toString(), 24, data.lineCount)
                 }
         }
     }
@@ -66,4 +67,11 @@ class ExtractTextTest {
                 BitmapFactory.decodeStream(inputStream)
             }
     }
+
+    private val RawDocumentData.lineCount: Int
+        get() {
+            return blocks.fold(0) { count, block ->
+                count + block.lines.size
+            }
+        }
 }
