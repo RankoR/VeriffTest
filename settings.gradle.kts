@@ -1,8 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":sdk")
-
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
