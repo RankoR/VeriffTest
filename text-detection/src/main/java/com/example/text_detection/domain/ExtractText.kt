@@ -19,10 +19,10 @@ internal class ExtractTextImpl(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : ExtractText {
 
+    private val textRecognizer by lazy { TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS) }
+
     override suspend fun exec(bitmap: Bitmap, rotationDegree: Int): Flow<List<String>> {
         return callbackFlow {
-            val textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS) // TODO: Move somewhere
-
             val inputImage = InputImage.fromBitmap(bitmap, rotationDegree)
 
             textRecognizer
