@@ -30,6 +30,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = BuildVersions.JAVA_VERSION
         targetCompatibility = BuildVersions.JAVA_VERSION

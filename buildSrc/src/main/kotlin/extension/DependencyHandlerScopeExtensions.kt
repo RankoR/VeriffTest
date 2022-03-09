@@ -25,6 +25,7 @@ fun DependencyHandlerScope.addHilt() {
     implementation(Dependencies.Libraries.HILT_ANDROID)
     kapt(Dependencies.Libraries.HILT_COMPILER)
     kapt(Dependencies.Libraries.HILT_ANDROID_COMPILER)
+    kapt(Dependencies.Libraries.ANDROID_X_HILT_COMPILER)
 }
 
 fun DependencyHandlerScope.addCoreTestLibraries() {
