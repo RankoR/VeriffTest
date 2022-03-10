@@ -11,7 +11,7 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     protected lateinit var binding: VB
 
-    protected abstract val viewModel: BaseViewModel?
+    protected open val viewModel: BaseViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

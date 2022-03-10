@@ -10,7 +10,7 @@ dependencies {
     implementation(projects.coreUi)
     implementation(projects.textDetection)
 
-    // Hilt
+    // Dagger
     addDagger()
 
     // Tests

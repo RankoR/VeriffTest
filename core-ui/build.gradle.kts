@@ -1,6 +1,7 @@
 
 import dependency.Dependencies
 import extension.addCoreTestLibraries
+import extension.addDagger
 
 plugins {
     `base-lib`
@@ -21,6 +22,9 @@ dependencies {
 
     // Material
     api(Dependencies.Libraries.GOOGLE_MATERIAL)
+
+    // Dagger
+    addDagger()
 
     // Tests
     addCoreTestLibraries()
