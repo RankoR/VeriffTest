@@ -2,8 +2,7 @@ package com.example.sdk.di
 
 import com.example.core.di.CoreModule
 import com.example.core_ui.di.viewmodel.ViewModelModule
-import com.example.sdk.presentation.IdRecognitionActivity
-import com.example.text_detection.di.TextDetectionModule
+import com.example.sdk.presentation.id.IdRecognitionActivity
 import dagger.Component
 import timber.log.Timber
 import javax.inject.Singleton

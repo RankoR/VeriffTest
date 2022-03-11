@@ -1,10 +1,9 @@
-package com.example.text_detection.domain
+package com.example.sdk.domain.id.interactor
 
 import android.graphics.Bitmap
-import com.example.text_detection.data.model.RawDocumentData
-import com.example.text_detection.domain.exception.NoTextFoundException
+import com.example.sdk.data.model.RawDocumentData
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.Text.Line
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.Text.TextBlock
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
@@ -40,7 +39,7 @@ internal class ExtractTextImpl(
                             if (rawDocumentData.isValid) {
                                 trySend(rawDocumentData)
                             } else {
-                                close(NoTextFoundException())
+                                close(com.example.sdk.domain.id.exception.NoTextFoundException())
                             }
                         }
                 }
@@ -63,7 +62,7 @@ internal class ExtractTextImpl(
         ).takeIf { it.isValid }
     }
 
-    private fun Line.toInternalLine(): RawDocumentData.Line? {
+    private fun Text.Line.toInternalLine(): RawDocumentData.Line? {
         return RawDocumentData.Line(
             text = text,
             language = recognizedLanguage,

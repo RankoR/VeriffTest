@@ -18,7 +18,7 @@ dependencies {
     // Timber
     api(Dependencies.Libraries.TIMBER)
 
-    // Hilt
+    // Dagger
     addDagger()
 
     // Tests

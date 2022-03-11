@@ -1,8 +1,8 @@
-package com.example.text_detection.di
+package com.example.sdk.di
 
 import com.example.core.di.DISPATCHER_DEFAULT
-import com.example.text_detection.domain.ExtractText
-import com.example.text_detection.domain.ExtractTextImpl
+import com.example.sdk.domain.id.interactor.ExtractText
+import com.example.sdk.domain.id.interactor.ExtractTextImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable

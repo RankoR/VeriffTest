@@ -1,16 +1,14 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
-package com.example.text_detection
+package com.example.sdk
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.core_tests.assertThrows
 import com.example.core_tests.awaitSingle
-import com.example.text_detection.data.model.RawDocumentData
-import com.example.text_detection.domain.ExtractText
-import com.example.text_detection.domain.ExtractTextImpl
-import com.example.text_detection.domain.exception.NoTextFoundException
+import com.example.sdk.domain.id.interactor.ExtractText
+import com.example.sdk.domain.id.interactor.ExtractTextImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -54,7 +52,7 @@ class ExtractTextTest {
         runTest {
             extractText
                 .exec(idBitmap, 0)
-                .assertThrows<NoTextFoundException>()
+                .assertThrows<com.example.sdk.domain.id.exception.NoTextFoundException>()
         }
     }
 
@@ -68,7 +66,7 @@ class ExtractTextTest {
             }
     }
 
-    private val RawDocumentData.lineCount: Int
+    private val com.example.sdk.data.model.RawDocumentData.lineCount: Int
         get() {
             return blocks.fold(0) { count, block ->
                 count + block.lines.size

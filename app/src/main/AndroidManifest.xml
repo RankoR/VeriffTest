@@ -17,10 +17,6 @@
         android:theme="@style/Theme.TestApp">
 
         <activity
-            android:name=".CameraActivity"
-            android:exported="false"/>
-
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -32,7 +28,7 @@
 
         <!-- SDK Activities -->
         <activity
-            android:name="com.example.sdk.presentation.IdRecognitionActivity"
+            android:name="com.example.sdk.presentation.id.IdRecognitionActivity"
             android:exported="false"/>
 
     </application>

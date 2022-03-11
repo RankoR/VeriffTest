@@ -2,7 +2,6 @@ package com.example.sdk.di
 
 import android.app.Application
 import com.example.core.di.CoreModule
-import com.example.text_detection.di.TextDetectionModule
 import timber.log.Timber
 
 internal object DiHolder {

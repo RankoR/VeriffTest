@@ -1,4 +1,4 @@
-package com.example.text_detection.data.model
+package com.example.sdk.data.model
 
 import android.graphics.Rect
 
@@ -8,13 +8,13 @@ data class RawDocumentData(
 
     val isValid = blocks.isNotEmpty()
 
-//    override fun toString(): String {
-//        return blocks
-//            .asSequence()
-//            .map { it.lines }
-//            .flatten()
-//            .joinToString("\n")
-//    }
+    override fun toString(): String {
+        return blocks
+            .asSequence()
+            .map { it.lines }
+            .flatten()
+            .joinToString("\n")
+    }
 
     data class Block(
         val lines: List<Line>,

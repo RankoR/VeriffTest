@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import com.example.sdk.di.DiHolder
-import com.example.sdk.presentation.IdRecognitionActivity
+import com.example.sdk.presentation.id.IdRecognitionActivity
 import timber.log.Timber
 
 object VeriffSdk {

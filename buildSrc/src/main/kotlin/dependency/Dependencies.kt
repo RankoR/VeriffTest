@@ -63,7 +63,6 @@ object Dependencies {
             const val COROUTINES = "1.6.0"
 
             const val DAGGER = "2.41"
-            const val ANDROID_X_HILT = "1.0.0"
 
             // AndroidX
             const val ANDROID_X_CORE_KTX = "1.7.0"

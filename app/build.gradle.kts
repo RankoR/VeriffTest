@@ -1,4 +1,4 @@
-import dependency.Dependencies
+
 import dimension.Dimensions
 import extension.addCoreTestLibraries
 import version.BuildVersions
@@ -79,13 +79,7 @@ dependencies {
     // TODO: Remove unnecessary modules from here
     implementation(projects.core)
     implementation(projects.coreUi)
-    implementation(projects.textDetection)
     implementation(projects.sdk)
-
-    // CameraX
-    implementation(Dependencies.Libraries.CAMERA_X)
-    implementation(Dependencies.Libraries.CAMERA_X_LIFECYCLE)
-    implementation(Dependencies.Libraries.CAMERA_X_VIEW)
 
     // Tests
     addCoreTestLibraries()

@@ -1,7 +1,7 @@
-package com.example.sdk.presentation
+package com.example.sdk.presentation.id
 
 import com.example.core_ui.presentation.BaseViewModel
-import com.example.text_detection.domain.ExtractText
+import com.example.sdk.domain.id.interactor.ExtractText
 import javax.inject.Inject
 
 class IdRecognitionViewModel @Inject constructor(

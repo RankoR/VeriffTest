@@ -1,3 +1,4 @@
+import dependency.Dependencies
 import extension.addCoreTestLibraries
 import extension.addDagger
 
@@ -8,7 +9,14 @@ plugins {
 dependencies {
     implementation(projects.core)
     implementation(projects.coreUi)
-    implementation(projects.textDetection)
+
+    // ML Kit
+    implementation(Dependencies.Libraries.ML_KIT_TEXT_RECOGNITION)
+
+    // CameraX
+    implementation(Dependencies.Libraries.CAMERA_X)
+    implementation(Dependencies.Libraries.CAMERA_X_LIFECYCLE)
+    implementation(Dependencies.Libraries.CAMERA_X_VIEW)
 
     // Dagger
     addDagger()

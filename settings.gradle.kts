@@ -14,7 +14,6 @@ include(
     ":core",
     ":core-tests",
     ":core-ui",
-    ":text-detection",
     ":sdk",
 
     ":app"

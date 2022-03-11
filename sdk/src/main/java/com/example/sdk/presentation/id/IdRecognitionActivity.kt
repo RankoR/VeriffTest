@@ -1,4 +1,4 @@
-package com.example.sdk.presentation
+package com.example.sdk.presentation.id
 
 import android.os.Bundle
 import androidx.activity.viewModels
