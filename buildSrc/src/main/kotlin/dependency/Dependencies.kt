@@ -37,9 +37,10 @@ object Dependencies {
         const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
 
         // CameraX
+        const val CAMERA_X_CORE = "androidx.camera:camera-core:${Versions.CAMERA_X}"
         const val CAMERA_X = "androidx.camera:camera-camera2:${Versions.CAMERA_X}"
         const val CAMERA_X_LIFECYCLE = "androidx.camera:camera-lifecycle:${Versions.CAMERA_X}"
-        const val CAMERA_X_VIEW = "androidx.camera:camera-view:${Versions.CAMERA_X_VIEW}"
+        const val CAMERA_X_VIEW = "androidx.camera:camera-view:${Versions.CAMERA_X}"
 
         // ML Kit
         const val ML_KIT_TEXT_RECOGNITION = "com.google.mlkit:text-recognition:${Versions.ML_KIT}"
@@ -78,8 +79,7 @@ object Dependencies {
             const val TIMBER = "5.0.1"
 
             // CameraX
-            const val CAMERA_X = "1.0.2"
-            const val CAMERA_X_VIEW = "1.1.0-beta02"
+            const val CAMERA_X = "1.1.0-beta02"
 
             // ML Kit
             const val ML_KIT = "16.0.0-beta3"

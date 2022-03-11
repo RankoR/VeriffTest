@@ -14,6 +14,7 @@ dependencies {
     implementation(Dependencies.Libraries.ML_KIT_TEXT_RECOGNITION)
 
     // CameraX
+    implementation(Dependencies.Libraries.CAMERA_X_CORE)
     implementation(Dependencies.Libraries.CAMERA_X)
     implementation(Dependencies.Libraries.CAMERA_X_LIFECYCLE)
     implementation(Dependencies.Libraries.CAMERA_X_VIEW)

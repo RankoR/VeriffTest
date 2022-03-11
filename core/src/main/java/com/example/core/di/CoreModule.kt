@@ -2,6 +2,8 @@ package com.example.core.di
 
 import android.app.Application
 import android.content.Context
+import com.example.core.domain.ArePermissionsGranted
+import com.example.core.domain.ArePermissionsGrantedImpl
 import com.example.core.domain.IsDebug
 import com.example.core.domain.IsDebugImpl
 import dagger.Module
@@ -26,6 +28,13 @@ class CoreModule(
     @Provides
     @Reusable
     fun provideIsDebug(): IsDebug = IsDebugImpl()
+
+    @Provides
+    @Reusable
+    fun provideArePermissionsGranted(
+        @Named(APPLICATION_CONTEXT)
+        context: Context
+    ): ArePermissionsGranted = ArePermissionsGrantedImpl(context)
 
     @Provides
     @Singleton
