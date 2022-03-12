@@ -45,6 +45,9 @@ object Dependencies {
         // ML Kit
         const val ML_KIT_TEXT_RECOGNITION = "com.google.mlkit:text-recognition:${Versions.ML_KIT}"
 
+        // LeakCanary
+        const val LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
+
         // Test
         const val JUNIT = "junit:junit:${Versions.JUNIT}"
         const val KOTLIN_TEST = "org.jetbrains.kotlin:kotlin-test:${Versions.KOTLIN}"
@@ -83,6 +86,9 @@ object Dependencies {
 
             // ML Kit
             const val ML_KIT = "16.0.0-beta3"
+
+            // LeakCanary
+            const val LEAK_CANARY = "2.8.1"
 
             // Tests
             const val JUNIT = "4.13.2"

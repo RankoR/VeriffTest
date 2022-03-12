@@ -22,6 +22,8 @@ dependencies {
     // Dagger
     addDagger()
 
+    debugImplementation(Dependencies.Libraries.LEAK_CANARY)
+
     // Tests
     addCoreTestLibraries()
 }

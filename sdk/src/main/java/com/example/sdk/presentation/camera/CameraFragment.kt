@@ -3,25 +3,21 @@ package com.example.sdk.presentation.camera
 import android.Manifest
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCapture.OnImageCapturedCallback
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.core.domain.ArePermissionsGranted
 import com.example.core_ui.presentation.BaseFragment
 import com.example.core_ui.util.setOnSingleClickListener
 import com.example.sdk.data.model.CameraType
 import com.example.sdk.databinding.FragmentCameraBinding
 import com.example.sdk.di.DiHolder
+import com.example.sdk.di.module.FragmentModule
+import com.example.sdk.domain.camera.CameraProviderWrapper
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding::inflate) {
@@ -32,12 +28,12 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     @Inject
     protected lateinit var arePermissionsGranted: ArePermissionsGranted
 
+    @Inject
+    protected lateinit var cameraProviderWrapper: CameraProviderWrapper
+
     override val viewModel: CameraViewModel by viewModels { viewModelFactory }
 
     private lateinit var cameraType: CameraType
-
-    private var imageCapture: ImageCapture? = null
-    private val cameraExecutor by lazy { Executors.newSingleThreadExecutor() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +42,12 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     }
 
     private fun initializedDi() {
-        DiHolder.sdkComponent.inject(this)
+        DiHolder
+            .sdkComponent
+            .fragmentComponentBuilder
+            .fragmentModule(FragmentModule(requireContext()))
+            .build()
+            .inject(this)
     }
 
     override fun setupView() {
@@ -64,12 +65,6 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
         }
     }
 
-    override fun onDestroy() {
-        cameraExecutor.shutdown()
-
-        super.onDestroy()
-    }
-
     private fun checkPermissionsAndStart() {
         if (arePermissionsGranted.exec(Manifest.permission.CAMERA)) {
             startCamera()
@@ -83,80 +78,60 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     }
 
     private fun startCamera() {
-        val context = context ?: return
-
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            val preview = Preview.Builder()
-                .build()
-                .apply {
-                    binding?.previewView?.surfaceProvider?.let(::setSurfaceProvider)
-                }
-
-            val cameraSelector = when (cameraType) {
-                CameraType.MAIN -> CameraSelector.DEFAULT_BACK_CAMERA
-                CameraType.FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+        binding
+            ?.previewView
+            ?.surfaceProvider
+            ?.let { surfaceProvider ->
+                cameraProviderWrapper.start(cameraType, surfaceProvider, this)
+            }
+            ?: run {
+                // TODO: Error
+                return
             }
 
-            imageCapture = ImageCapture.Builder().build()
-
-            try {
-                cameraProvider.apply {
-                    unbindAll()
-                    bindToLifecycle(this@CameraFragment, cameraSelector, preview, imageCapture)
+        lifecycleScope.launch {
+            cameraProviderWrapper
+                .imageFlow
+                .catch { t ->
+                    Timber.e(t, "Failed to get a photo")
+                    // TODO: Error
                 }
-            } catch (e: Exception) {
-                Timber.e(e, "Use case binding failed")
-
-                // TODO: Show error
-            }
-        }, ContextCompat.getMainExecutor(context))
-        }
-
-        private fun takePhoto() {
-            imageCapture?.takePicture(
-                cameraExecutor,
-                object : OnImageCapturedCallback() {
-                    override fun onCaptureSuccess(image: ImageProxy) {
-                        super.onCaptureSuccess(image)
-
-                        Timber.d("onCaptureSuccess")
-                    }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        super.onError(exception)
-
-                        Timber.e(exception, "Failed to take a photo")
-
-                        // TODO: Show error
-                    }
+                .collect { imageProxy ->
+                    Timber.d("Got an image proxy: $imageProxy")
                 }
-            )
         }
+    }
 
-        private val requestPermissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            Timber.d("Permission granted: $isGranted")
+    private fun takePhoto() {
+        cameraProviderWrapper.takePicture()
+    }
 
-            if (isGranted) {
-                checkPermissionsAndStart()
-            } else {
-                // TODO: Show dialog
-            }
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        Timber.d("Permission granted: $isGranted")
+
+        if (isGranted) {
+            checkPermissionsAndStart()
+        } else {
+            // TODO: Show dialog
         }
+    }
 
-        companion object {
+    override fun onDestroy() {
+        cameraProviderWrapper.release()
 
-            private const val ARG_CAMERA_TYPE = "camera_type"
+        super.onDestroy()
+    }
 
-            fun newInstance(cameraType: CameraType): CameraFragment {
-                return CameraFragment().apply {
-                    arguments = bundleOf(ARG_CAMERA_TYPE to cameraType.ordinal)
-                }
+    companion object {
+
+        private const val ARG_CAMERA_TYPE = "camera_type"
+
+        fun newInstance(cameraType: CameraType): CameraFragment {
+            return CameraFragment().apply {
+                arguments = bundleOf(ARG_CAMERA_TYPE to cameraType.ordinal)
             }
         }
     }
+}

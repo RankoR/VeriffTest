@@ -7,5 +7,4 @@ abstract class BaseInstrumentedTest {
 
     protected val targetContext: Context
         get() = InstrumentationRegistry.getInstrumentation().targetContext
-
 }

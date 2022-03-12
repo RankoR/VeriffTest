@@ -2,6 +2,9 @@ package com.example.sdk.di
 
 import android.app.Application
 import com.example.core.di.CoreModule
+import com.example.sdk.di.component.DaggerSdkComponent
+import com.example.sdk.di.component.SdkComponent
+import com.example.sdk.di.module.TextExtractionModule
 import timber.log.Timber
 
 internal object DiHolder {
@@ -20,7 +23,7 @@ internal object DiHolder {
         sdkComponent = DaggerSdkComponent
             .builder()
             .coreModule(CoreModule(application))
-            .textDetectionModule(TextDetectionModule())
+            .textExtractionModule(TextExtractionModule())
             .build()
     }
 }
