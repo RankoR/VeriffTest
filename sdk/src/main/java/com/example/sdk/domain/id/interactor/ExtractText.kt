@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.flowOn
 import java.io.File
 
 interface ExtractText {
-    suspend fun exec(file: File, rotationDegree: Int): Flow<RawDocumentData>
+    suspend fun exec(file: File): Flow<RawDocumentData>
 }
 
 internal class ExtractTextImpl(
@@ -26,7 +26,7 @@ internal class ExtractTextImpl(
 
     private val textRecognizer by lazy { TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS) }
 
-    override suspend fun exec(file: File, rotationDegree: Int): Flow<RawDocumentData> {
+    override suspend fun exec(file: File): Flow<RawDocumentData> {
         return callbackFlow {
             val inputImage = InputImage.fromFilePath(context, file.toUri())
 

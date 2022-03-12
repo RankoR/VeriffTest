@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.core.domain.ArePermissionsGranted
@@ -11,6 +12,7 @@ import com.example.core_ui.presentation.BaseFragment
 import com.example.core_ui.presentation.BaseViewModel
 import com.example.core_ui.util.setOnSingleClickListener
 import com.example.sdk.data.model.CameraType
+import com.example.sdk.data.model.PhotoResult
 import com.example.sdk.databinding.FragmentCameraBinding
 import com.example.sdk.di.DiHolder
 import com.example.sdk.di.module.FragmentModule
@@ -85,7 +87,11 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                 cameraProviderWrapper.start(cameraType, surfaceProvider, this)
             }
             ?: run {
-                // TODO: Error
+                setResult(
+                    PhotoResult.Failure(
+                        errorMessage = "No surface provider"
+                    )
+                )
                 return
             }
 
@@ -94,16 +100,37 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                 .imageFlow
                 .catch { t ->
                     Timber.e(t, "Failed to get a photo")
-                    // TODO: Error
+
+                    setResult(
+                        PhotoResult.Failure(
+                            // Probably there's a better way as in this case we lose a stacktrace
+                            errorMessage = t.message.orEmpty()
+                        )
+                    )
                 }
-                .collect { imageProxy ->
-                    Timber.d("Got an image proxy: $imageProxy")
+                .collect { file ->
+                    Timber.d("Got an image file: ${file.absolutePath}")
+
+                    setResult(
+                        PhotoResult.Success(
+                            filePath = file.absolutePath
+                        )
+                    )
                 }
         }
     }
 
     private fun takePhoto() {
         cameraProviderWrapper.takePicture()
+    }
+
+    private fun setResult(result: PhotoResult) {
+        setFragmentResult(
+            PHOTO_REQUEST_KEY,
+            bundleOf(
+                PHOTO_RESULT_KEY to result
+            )
+        )
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -127,6 +154,9 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     companion object {
 
         private const val ARG_CAMERA_TYPE = "camera_type"
+
+        const val PHOTO_REQUEST_KEY = "photo_request"
+        const val PHOTO_RESULT_KEY = "photo_result"
 
         fun newInstance(cameraType: CameraType): CameraFragment {
             return CameraFragment().apply {
