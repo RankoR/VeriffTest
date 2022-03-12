@@ -4,6 +4,7 @@ import extension.addDagger
 
 plugins {
     `base-lib`
+    id("kotlin-parcelize")
 }
 
 dependencies {
