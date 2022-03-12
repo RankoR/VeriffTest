@@ -2,11 +2,10 @@
 
 package com.example.sdk
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import androidx.test.platform.app.InstrumentationRegistry
+import com.example.core_tests.BaseInstrumentedTest
 import com.example.core_tests.assertThrows
 import com.example.core_tests.awaitSingle
+import com.example.sdk.data.model.RawDocumentData
 import com.example.sdk.domain.id.interactor.ExtractText
 import com.example.sdk.domain.id.interactor.ExtractTextImpl
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +13,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.io.File
 
-class ExtractTextTest {
+class ExtractTextTest : BaseInstrumentedTest() {
 
-    private val extractText: ExtractText = ExtractTextImpl(Dispatchers.Default)
+    private val extractText: ExtractText = ExtractTextImpl(
+        targetContext,
+        Dispatchers.Default
+    )
 
     @Test
     fun normalExtractScannedId() {
@@ -56,17 +59,19 @@ class ExtractTextTest {
         }
     }
 
-    private fun getIdFromAssets(fileName: String): Bitmap {
-        return InstrumentationRegistry
-            .getInstrumentation()
-            .targetContext
+    private fun getIdFromAssets(fileName: String): File {
+        return targetContext
             .assets
             .open("images/$fileName").use { inputStream ->
-                BitmapFactory.decodeStream(inputStream)
+                File(targetContext.cacheDir, System.currentTimeMillis().toString()).apply {
+                    outputStream().use { outputStream ->
+                        inputStream.copyTo(outputStream)
+                    }
+                }
             }
     }
 
-    private val com.example.sdk.data.model.RawDocumentData.lineCount: Int
+    private val RawDocumentData.lineCount: Int
         get() {
             return blocks.fold(0) { count, block ->
                 count + block.lines.size

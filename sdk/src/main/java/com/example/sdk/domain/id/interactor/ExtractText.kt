@@ -1,6 +1,7 @@
 package com.example.sdk.domain.id.interactor
 
-import android.graphics.Bitmap
+import android.content.Context
+import androidx.core.net.toUri
 import com.example.sdk.data.model.RawDocumentData
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
@@ -12,20 +13,22 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
+import java.io.File
 
 interface ExtractText {
-    suspend fun exec(bitmap: Bitmap, rotationDegree: Int): Flow<RawDocumentData>
+    suspend fun exec(file: File, rotationDegree: Int): Flow<RawDocumentData>
 }
 
 internal class ExtractTextImpl(
+    private val context: Context,
     private val coroutineDispatcher: CoroutineDispatcher
 ) : ExtractText {
 
     private val textRecognizer by lazy { TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS) }
 
-    override suspend fun exec(bitmap: Bitmap, rotationDegree: Int): Flow<RawDocumentData> {
+    override suspend fun exec(file: File, rotationDegree: Int): Flow<RawDocumentData> {
         return callbackFlow {
-            val inputImage = InputImage.fromBitmap(bitmap, rotationDegree)
+            val inputImage = InputImage.fromFilePath(context, file.toUri())
 
             textRecognizer
                 .process(inputImage)

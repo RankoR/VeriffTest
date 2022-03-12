@@ -1,5 +1,7 @@
-package com.example.sdk.di
+package com.example.sdk.di.module
 
+import android.content.Context
+import com.example.core.di.APPLICATION_CONTEXT
 import com.example.core.di.DISPATCHER_DEFAULT
 import com.example.sdk.domain.id.interactor.ExtractText
 import com.example.sdk.domain.id.interactor.ExtractTextImpl
@@ -15,7 +17,9 @@ class TextDetectionModule {
     @Provides
     @Reusable
     fun provideExtractText(
+        @Named(APPLICATION_CONTEXT)
+        context: Context,
         @Named(DISPATCHER_DEFAULT)
         dispatcher: CoroutineDispatcher
-    ): ExtractText = ExtractTextImpl(dispatcher)
+    ): ExtractText = ExtractTextImpl(context, dispatcher)
 }
