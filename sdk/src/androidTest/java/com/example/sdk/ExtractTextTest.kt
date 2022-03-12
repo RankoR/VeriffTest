@@ -6,6 +6,7 @@ import com.example.core_tests.BaseInstrumentedTest
 import com.example.core_tests.assertThrows
 import com.example.core_tests.awaitSingle
 import com.example.sdk.data.model.RawDocumentData
+import com.example.sdk.domain.id.exception.NoTextFoundException
 import com.example.sdk.domain.id.interactor.ExtractText
 import com.example.sdk.domain.id.interactor.ExtractTextImpl
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,7 @@ class ExtractTextTest : BaseInstrumentedTest() {
 
         runTest {
             extractText
-                .exec(idBitmap, 0)
+                .exec(idBitmap)
                 .awaitSingle { data ->
                     assertEquals(data.toString(), 24, data.lineCount)
                 }
@@ -41,7 +42,7 @@ class ExtractTextTest : BaseInstrumentedTest() {
 
         runTest {
             extractText
-                .exec(idBitmap, 0)
+                .exec(idBitmap)
                 .awaitSingle { data ->
                     assertEquals(data.toString(), 24, data.lineCount)
                 }
@@ -54,8 +55,8 @@ class ExtractTextTest : BaseInstrumentedTest() {
 
         runTest {
             extractText
-                .exec(idBitmap, 0)
-                .assertThrows<com.example.sdk.domain.id.exception.NoTextFoundException>()
+                .exec(idBitmap)
+                .assertThrows<NoTextFoundException>()
         }
     }
 
