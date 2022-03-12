@@ -4,11 +4,11 @@ import android.Manifest
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.core.domain.ArePermissionsGranted
 import com.example.core_ui.presentation.BaseFragment
+import com.example.core_ui.presentation.BaseViewModel
 import com.example.core_ui.util.setOnSingleClickListener
 import com.example.sdk.data.model.CameraType
 import com.example.sdk.databinding.FragmentCameraBinding
@@ -31,9 +31,9 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     @Inject
     protected lateinit var cameraProviderWrapper: CameraProviderWrapper
 
-    override val viewModel: CameraViewModel by viewModels { viewModelFactory }
-
     private lateinit var cameraType: CameraType
+
+    override val viewModel: BaseViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
