@@ -19,6 +19,9 @@ abstract class BaseActivity<VB : ViewBinding>(
         binding = inflate
             .invoke(layoutInflater)
             .also { setContentView(it.root) }
+
+        setupView()
+        setupViewModel()
     }
 
     open fun setupView() {}
