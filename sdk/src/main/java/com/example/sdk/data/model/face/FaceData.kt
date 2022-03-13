@@ -4,6 +4,7 @@ import android.graphics.PointF
 import android.graphics.Rect
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlin.math.abs
 
 @Parcelize
 data class FaceData(
@@ -20,6 +21,13 @@ data class FaceData(
 
     val areBothEyesOpen: Boolean
         get() = leftEyeOpenProbability >= MIN_OPEN_EYE_PROBABILITY && rightEyeOpenProbability >= MIN_OPEN_EYE_PROBABILITY
+
+    val isHeadRotationValid: Boolean
+        get() {
+            return abs(headEulerAngleX) <= MAX_HEAD_ROTATION &&
+                abs(headEulerAngleY) <= MAX_HEAD_ROTATION &&
+                abs(headEulerAngleZ) <= MAX_HEAD_ROTATION
+        }
 
     @Parcelize
     data class FaceContour(
@@ -67,6 +75,7 @@ data class FaceData(
     }
 
     private companion object {
-        private const val MIN_OPEN_EYE_PROBABILITY = 0.7f // TODO: Tune
+        private const val MIN_OPEN_EYE_PROBABILITY = 0.7f
+        private const val MAX_HEAD_ROTATION = 15f
     }
 }

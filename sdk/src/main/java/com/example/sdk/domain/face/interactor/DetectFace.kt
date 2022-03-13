@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.net.toUri
 import com.example.sdk.data.model.face.FaceData
 import com.example.sdk.domain.face.exception.EyesClosedException
+import com.example.sdk.domain.face.exception.HeadRotationException
 import com.example.sdk.domain.face.exception.MissingFaceException
 import com.example.sdk.domain.face.exception.MultipleFacesException
 import com.google.mlkit.vision.common.InputImage
@@ -57,6 +58,8 @@ internal class DetectFaceImpl(
                             .let { faceData ->
                                 if (!faceData.areBothEyesOpen) {
                                     close(EyesClosedException())
+                                } else if (!faceData.isHeadRotationValid) {
+                                    close(HeadRotationException())
                                 } else {
                                     trySend(faceData)
                                 }
