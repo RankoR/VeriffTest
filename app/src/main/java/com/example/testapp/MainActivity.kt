@@ -17,12 +17,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         binding.readTextBtn.setOnSingleClickListener {
             VeriffSdk.launchIdRecognition()
         }
+
+        binding.detectFaceBtn.setOnSingleClickListener {
+            VeriffSdk.launchFaceRecognition()
+        }
     }
 
     private fun initializeVeriffSdk() {
         VeriffSdk.registerActivity(this)
+
         VeriffSdk.onTextDocumentResult = { result ->
             Timber.d("Text document result: $result")
+        }
+
+        VeriffSdk.onFaceResult = { result ->
+            Timber.d("Face result: $result")
         }
     }
 }

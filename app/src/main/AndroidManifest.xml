@@ -27,8 +27,13 @@
         </activity>
 
         <!-- SDK Activities -->
+
         <activity
             android:name="com.example.sdk.presentation.id.IdRecognitionActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name="com.example.sdk.presentation.face.FaceRecognitionActivity"
             android:exported="false"/>
 
     </application>
