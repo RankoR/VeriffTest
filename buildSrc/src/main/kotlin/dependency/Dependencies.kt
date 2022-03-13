@@ -44,6 +44,7 @@ object Dependencies {
 
         // ML Kit
         const val ML_KIT_TEXT_RECOGNITION = "com.google.mlkit:text-recognition:${Versions.ML_KIT}"
+        const val ML_KIT_FACE_DETECTION = "com.google.mlkit:face-detection:${Versions.ML_KIT}"
 
         // LeakCanary
         const val LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"

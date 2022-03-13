@@ -50,6 +50,7 @@ dependencies {
 
     // ML Kit
     implementation(Dependencies.Libraries.ML_KIT_TEXT_RECOGNITION)
+    implementation(Dependencies.Libraries.ML_KIT_FACE_DETECTION)
 
     // CameraX
     implementation(Dependencies.Libraries.CAMERA_X_CORE)
