@@ -14,7 +14,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.io.File
 
 class ExtractTextTest : BaseInstrumentedTest() {
 
@@ -25,11 +24,11 @@ class ExtractTextTest : BaseInstrumentedTest() {
 
     @Test
     fun normalExtractScannedId() {
-        val idBitmap = getIdFromAssets("id0.jpeg")
+        val file = getFileFromAssets("images/ids/id0.jpeg")
 
         runTest {
             extractText
-                .exec(idBitmap)
+                .exec(file)
                 .awaitSingle { data ->
                     assertEquals(data.toString(), 24, data.lineCount)
                 }
@@ -38,11 +37,11 @@ class ExtractTextTest : BaseInstrumentedTest() {
 
     @Test
     fun normalExtractRealPhoto() {
-        val idBitmap = getIdFromAssets("id1.jpeg")
+        val file = getFileFromAssets("images/ids/id1.jpeg")
 
         runTest {
             extractText
-                .exec(idBitmap)
+                .exec(file)
                 .awaitSingle { data ->
                     assertEquals(data.toString(), 24, data.lineCount)
                 }
@@ -51,25 +50,13 @@ class ExtractTextTest : BaseInstrumentedTest() {
 
     @Test
     fun failedExtractEmptyImage() {
-        val idBitmap = getIdFromAssets("empty.jpeg")
+        val file = getFileFromAssets("images/ids/empty.jpeg")
 
         runTest {
             extractText
-                .exec(idBitmap)
+                .exec(file)
                 .assertThrows<NoTextFoundException>()
         }
-    }
-
-    private fun getIdFromAssets(fileName: String): File {
-        return targetContext
-            .assets
-            .open("images/ids/$fileName").use { inputStream ->
-                File(targetContext.cacheDir, System.currentTimeMillis().toString()).apply {
-                    outputStream().use { outputStream ->
-                        inputStream.copyTo(outputStream)
-                    }
-                }
-            }
     }
 
     private val RawDocumentData.lineCount: Int
