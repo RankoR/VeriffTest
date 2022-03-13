@@ -20,7 +20,7 @@ data class FaceData(
 ) : Parcelable {
 
     val areBothEyesOpen: Boolean
-        get() = leftEyeOpenProbability >= MIN_OPEN_EYE_PROBABILITY && rightEyeOpenProbability >= MIN_OPEN_EYE_PROBABILITY
+        get() = (leftEyeOpenProbability + rightEyeOpenProbability) / 2 >= MIN_OPEN_EYE_PROBABILITY
 
     val isHeadRotationValid: Boolean
         get() {
