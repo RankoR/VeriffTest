@@ -16,7 +16,7 @@ data class RawDocumentData(
     override fun toString(): String {
         return blocks
             .asSequence()
-            .map { it.lines }
+            .map { block -> block.lines.map { line -> line.text } }
             .flatten()
             .joinToString("\n")
     }
