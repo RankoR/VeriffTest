@@ -84,6 +84,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun showError(text: String, onRetryClick: () -> Unit) {
-        // TODO
+        ErrorFragment
+            .newInstance(text)
+            .apply {
+                this.onRetryClick = onRetryClick
+            }
+            .show(supportFragmentManager, ErrorFragment.TAG)
     }
 }
