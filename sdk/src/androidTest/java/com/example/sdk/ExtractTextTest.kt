@@ -63,7 +63,7 @@ class ExtractTextTest : BaseInstrumentedTest() {
     private fun getIdFromAssets(fileName: String): File {
         return targetContext
             .assets
-            .open("images/$fileName").use { inputStream ->
+            .open("images/ids/$fileName").use { inputStream ->
                 File(targetContext.cacheDir, System.currentTimeMillis().toString()).apply {
                     outputStream().use { outputStream ->
                         inputStream.copyTo(outputStream)
