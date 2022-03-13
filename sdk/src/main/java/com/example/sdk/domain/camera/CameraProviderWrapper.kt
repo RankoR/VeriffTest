@@ -50,7 +50,10 @@ internal class CameraProviderWrapperImpl(
                 CameraType.FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
             }
 
-            imageCapture = ImageCapture.Builder().build()
+            imageCapture = ImageCapture
+                .Builder()
+//                .setTargetRotation(Surface.ROTATION_0)
+                .build()
 
             try {
                 cameraProvider.apply {
@@ -68,25 +71,30 @@ internal class CameraProviderWrapperImpl(
         override fun takePicture() {
             val outputFile = getOutputFile()
 
-            val outputFileOptions = ImageCapture.OutputFileOptions.Builder(outputFile).build()
+            val outputFileOptions = ImageCapture
+                .OutputFileOptions
+                .Builder(outputFile)
+                .build()
 
-            imageCapture?.takePicture(
-                outputFileOptions, cameraExecutor,
-                object : ImageCapture.OnImageSavedCallback {
-                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Timber.d("onImageSaved: ${outputFileResults.savedUri}")
+            imageCapture
+                ?.takePicture(
+                    outputFileOptions,
+                    cameraExecutor,
+                    object : ImageCapture.OnImageSavedCallback {
+                        override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                            Timber.d("onImageSaved: ${outputFileResults.savedUri}")
 
-                        val isEmitted = imageFlow.tryEmit(outputFile)
-                        Timber.d("Is emitted: $isEmitted")
+                            val isEmitted = imageFlow.tryEmit(outputFile)
+                            Timber.d("Is emitted: $isEmitted")
+                        }
+
+                        override fun onError(exception: ImageCaptureException) {
+                            Timber.e(exception, "Failed to take a photo")
+
+                            // TODO: Show error
+                        }
                     }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        Timber.e(exception, "Failed to take a photo")
-
-                        // TODO: Show error
-                    }
-                }
-            )
+                )
         }
 
         override fun release() {
