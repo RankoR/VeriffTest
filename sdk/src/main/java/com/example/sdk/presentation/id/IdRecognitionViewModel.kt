@@ -2,7 +2,7 @@ package com.example.sdk.presentation.id
 
 import androidx.lifecycle.viewModelScope
 import com.example.core_ui.presentation.BaseViewModel
-import com.example.sdk.data.model.TextDocumentResult
+import com.example.sdk.data.model.id.TextDocumentResult
 import com.example.sdk.domain.id.interactor.ExtractText
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

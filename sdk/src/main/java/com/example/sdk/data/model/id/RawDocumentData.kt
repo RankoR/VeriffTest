@@ -1,4 +1,4 @@
-package com.example.sdk.data.model
+package com.example.sdk.data.model.id
 
 import android.graphics.Rect
 import android.os.Parcelable

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.sdk.R
 import com.example.sdk.data.model.CameraType
-import com.example.sdk.data.model.TextDocumentResult
+import com.example.sdk.data.model.id.TextDocumentResult
 import com.example.sdk.databinding.ActivityIdRecognitionBinding
 import com.example.sdk.di.DiHolder
 import com.example.sdk.presentation.camera.BaseCameraActivity

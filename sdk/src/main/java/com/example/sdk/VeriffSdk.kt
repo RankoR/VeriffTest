@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
-import com.example.sdk.data.model.TextDocumentResult
+import com.example.sdk.data.model.id.TextDocumentResult
 import com.example.sdk.di.DiHolder
 import com.example.sdk.presentation.id.IdRecognitionActivity
 import com.example.sdk.presentation.id.IdRecognitionContract

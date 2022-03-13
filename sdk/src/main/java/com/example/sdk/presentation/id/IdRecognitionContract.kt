@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import com.example.sdk.VeriffSdk
-import com.example.sdk.data.model.TextDocumentResult
+import com.example.sdk.data.model.id.TextDocumentResult
 
 internal class IdRecognitionContract : ActivityResultContract<Unit, TextDocumentResult>() {
 
@@ -15,7 +15,7 @@ internal class IdRecognitionContract : ActivityResultContract<Unit, TextDocument
 
     override fun parseResult(resultCode: Int, intent: Intent?): TextDocumentResult {
         return when (resultCode) {
-            Activity.RESULT_CANCELED -> TextDocumentResult.Cancelled()
+            Activity.RESULT_CANCELED -> TextDocumentResult.Cancelled
             else -> intent.parseResult()
         }
     }

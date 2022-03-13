@@ -1,4 +1,4 @@
-package com.example.sdk.data.model
+package com.example.sdk.data.model.id
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -16,5 +16,5 @@ sealed class TextDocumentResult : Parcelable {
     ) : TextDocumentResult()
 
     @Parcelize
-    class Cancelled : TextDocumentResult()
+    object Cancelled : TextDocumentResult()
 }

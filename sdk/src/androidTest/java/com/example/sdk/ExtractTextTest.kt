@@ -5,7 +5,7 @@ package com.example.sdk
 import com.example.core_tests.BaseInstrumentedTest
 import com.example.core_tests.assertThrows
 import com.example.core_tests.awaitSingle
-import com.example.sdk.data.model.RawDocumentData
+import com.example.sdk.data.model.id.RawDocumentData
 import com.example.sdk.domain.id.exception.NoTextFoundException
 import com.example.sdk.domain.id.interactor.ExtractText
 import com.example.sdk.domain.id.interactor.ExtractTextImpl
