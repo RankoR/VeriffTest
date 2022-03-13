@@ -4,6 +4,7 @@ import com.example.core.di.CoreModule
 import com.example.core_ui.di.viewmodel.ViewModelModule
 import com.example.sdk.di.module.SdkViewModelsModule
 import com.example.sdk.di.module.TextExtractionModule
+import com.example.sdk.presentation.face.FaceRecognitionActivity
 import com.example.sdk.presentation.id.IdRecognitionActivity
 import dagger.Component
 import timber.log.Timber
@@ -25,4 +26,5 @@ interface SdkComponent {
     val loggingTree: Timber.Tree
 
     fun inject(activity: IdRecognitionActivity)
+    fun inject(activity: FaceRecognitionActivity)
 }
