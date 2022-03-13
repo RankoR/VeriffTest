@@ -42,6 +42,9 @@ object Dependencies {
         const val CAMERA_X_LIFECYCLE = "androidx.camera:camera-lifecycle:${Versions.CAMERA_X}"
         const val CAMERA_X_VIEW = "androidx.camera:camera-view:${Versions.CAMERA_X}"
 
+        // ExifInterface
+        const val EXIF_INTERFACE = "androidx.exifinterface:exifinterface:${Versions.EXIF_INTERFACE}"
+
         // ML Kit
         const val ML_KIT_TEXT_RECOGNITION = "com.google.mlkit:text-recognition:${Versions.ML_KIT}"
         const val ML_KIT_FACE_DETECTION = "com.google.mlkit:face-detection:${Versions.ML_KIT_FACE_DETECTION}"
@@ -84,6 +87,8 @@ object Dependencies {
 
             // CameraX
             const val CAMERA_X = "1.1.0-beta02"
+
+            const val EXIF_INTERFACE = "1.3.3"
 
             // ML Kit
             const val ML_KIT = "16.0.0-beta3"

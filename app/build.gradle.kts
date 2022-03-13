@@ -1,4 +1,4 @@
-
+import dependency.Dependencies
 import dimension.Dimensions
 import extension.addCoreTestLibraries
 import version.BuildVersions
@@ -76,10 +76,12 @@ android {
 }
 
 dependencies {
-    // TODO: Remove unnecessary modules from here
     implementation(projects.core)
     implementation(projects.coreUi)
     implementation(projects.sdk)
+
+    // Needed to get an image rotation
+    implementation(Dependencies.Libraries.EXIF_INTERFACE)
 
     // Tests
     addCoreTestLibraries()
