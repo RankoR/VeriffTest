@@ -75,7 +75,7 @@ data class FaceData(
     }
 
     private companion object {
-        private const val MIN_OPEN_EYE_PROBABILITY = 0.7f
+        private const val MIN_OPEN_EYE_PROBABILITY = 0.2f
         private const val MAX_HEAD_ROTATION = 15f
     }
 }

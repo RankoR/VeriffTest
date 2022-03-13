@@ -57,7 +57,10 @@ internal class DetectFaceImpl(
                             .toInternalFaceData()
                             .let { faceData ->
                                 if (!faceData.areBothEyesOpen) {
-                                    close(EyesClosedException())
+                                    EyesClosedException(
+                                        leftOpenProbability = faceData.leftEyeOpenProbability,
+                                        rightOpenProbability = faceData.rightEyeOpenProbability
+                                    ).let(::close)
                                 } else if (!faceData.isHeadRotationValid) {
                                     close(HeadRotationException())
                                 } else {
