@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core_ui.presentation.BaseViewModel
 import com.example.sdk.data.model.id.TextDocumentResult
 import com.example.sdk.domain.id.interactor.ExtractText
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.catch
@@ -17,7 +18,7 @@ class IdRecognitionViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _documentResult = MutableSharedFlow<TextDocumentResult>()
-    val documentResult = _documentResult.asSharedFlow()
+    val documentResult: Flow<TextDocumentResult> = _documentResult.asSharedFlow()
 
     fun onGotPhoto(file: File) {
         viewModelScope.launch {
@@ -25,8 +26,6 @@ class IdRecognitionViewModel @Inject constructor(
                 .exec(file)
                 .catch { t ->
                     Timber.e(t)
-
-                    showErrorMessage(t)
 
                     // TODO: Better error info
                     _documentResult.emit(TextDocumentResult.Failure(text = t.message.orEmpty()))

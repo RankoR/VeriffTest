@@ -1,13 +1,18 @@
 package com.example.sdk.presentation.face
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.sdk.R
 import com.example.sdk.data.model.CameraType
+import com.example.sdk.data.model.face.FaceResult
 import com.example.sdk.databinding.ActivityFaceRecognitionBinding
 import com.example.sdk.di.DiHolder
 import com.example.sdk.presentation.camera.BaseCameraActivity
+import com.example.sdk.presentation.id.IdRecognitionContract
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -37,10 +42,34 @@ class FaceRecognitionActivity : BaseCameraActivity<ActivityFaceRecognitionBindin
     }
 
     override fun onGotPhoto(file: File) {
-        Timber.d("onGotPhoto: ${file.absolutePath}")
-
         showLoading()
 
         viewModel.onGotPhoto(file)
+    }
+
+    override fun setupViewModel() {
+        super.setupViewModel()
+
+        lifecycleScope.launch {
+            viewModel.faceResult.collect(::returnResult)
+        }
+    }
+
+    private fun returnResult(result: FaceResult) {
+        Intent()
+            .apply {
+                putExtra(FaceRecognitionContract.KEY_FACE_RESULT, result)
+            }
+            .let { intent ->
+                val resultCode = when (result) {
+                    is FaceResult.Success -> RESULT_OK
+                    is FaceResult.Cancelled -> RESULT_CANCELED
+                    is FaceResult.Failure -> IdRecognitionContract.RESULT_FAILURE
+                }
+
+                Timber.d("Setting result: $result")
+                setResult(resultCode, intent)
+                finish()
+            }
     }
 }

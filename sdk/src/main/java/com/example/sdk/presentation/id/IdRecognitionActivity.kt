@@ -41,8 +41,6 @@ class IdRecognitionActivity : BaseCameraActivity<ActivityIdRecognitionBinding>(
     }
 
     override fun onGotPhoto(file: File) {
-        Timber.d("Got a photo: ${file.absolutePath}")
-
         showLoading()
 
         viewModel.onGotPhoto(file)
