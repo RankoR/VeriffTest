@@ -3,6 +3,7 @@ package com.example.sdk.domain.id.interactor
 import android.content.Context
 import androidx.core.net.toUri
 import com.example.sdk.data.model.id.RawDocumentData
+import com.example.sdk.domain.id.exception.NoTextFoundException
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.Text.TextBlock
@@ -42,7 +43,7 @@ internal class ExtractTextImpl(
                             if (rawDocumentData.isValid) {
                                 trySend(rawDocumentData)
                             } else {
-                                close(com.example.sdk.domain.id.exception.NoTextFoundException())
+                                close(NoTextFoundException())
                             }
                         }
                 }
