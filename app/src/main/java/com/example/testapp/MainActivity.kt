@@ -60,7 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun FaceResult.handleResult() {
         when (this) {
             FaceResult.Cancelled -> showError(getString(R.string.title_message_cancelled)) { VeriffSdk.launchIdRecognition() }
-            is FaceResult.Failure -> showError(text) { VeriffSdk.launchIdRecognition() }
+            is FaceResult.Failure -> showError(text) { VeriffSdk.launchFaceRecognition() }
             is FaceResult.Success -> {
                 photoFile
                     .loadBitmap()

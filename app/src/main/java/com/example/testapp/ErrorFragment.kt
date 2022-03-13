@@ -28,7 +28,10 @@ class ErrorFragment : BottomSheetDialogFragment() {
         val message = arguments?.getString(ARG_MESSAGE) ?: return
 
         binding?.messageTv?.text = message
-        binding?.retryBtn?.setOnSingleClickListener { onRetryClick() }
+        binding?.retryBtn?.setOnSingleClickListener {
+            onRetryClick()
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {
