@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     `base-lib`
     id("kotlin-parcelize")
-    id("com.dicedmelon.gradle.jacoco-android") version "0.1.5"
 }
 
 android {
@@ -20,27 +19,6 @@ android {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
-    }
-}
-
-jacocoAndroidUnitTestReport {
-    csv.enabled(false)
-    html.enabled(true)
-    xml.enabled(true)
-
-    excludes = excludes + setOf(
-        "com/example/sdk/databinding/*.class"
-    )
-}
-
-// Fix for JaCoCo: https://youtrack.jetbrains.com/issue/KT-44757
-configurations.all {
-    resolutionStrategy {
-        eachDependency {
-            if (requested.group == "org.jacoco") {
-                useVersion("0.8.7")
-            }
-        }
     }
 }
 
