@@ -52,6 +52,9 @@ object Dependencies {
         // LeakCanary
         const val LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
 
+        // JaCoCo
+        const val JACOCO_AGENT = "org.jacoco:org.jacoco.agent:${Versions.JACOCO}"
+
         // Test
         const val JUNIT = "junit:junit:${Versions.JUNIT}"
         const val KOTLIN_TEST = "org.jetbrains.kotlin:kotlin-test:${Versions.KOTLIN}"
@@ -61,6 +64,7 @@ object Dependencies {
         const val ANDROIDX_TEST_RUNNER = "androidx.test:runner:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_RULES = "androidx.test:rules:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_EXT_JUNIT = "androidx.test.ext:junit:${Versions.ANDROIDX_TEST_EXT_JUNIT}"
+        const val ANDROIDX_TEST_EXT_JUNIT_KTX = "androidx.test.ext:junit-ktx:${Versions.ANDROIDX_TEST_EXT_JUNIT}"
         const val ANDROIDX_FRAGMENT_TESTING = "androidx.fragment:fragment-testing:${Versions.ANDROIDX_FRAGMENT_TESTING}"
         const val MOCKK = "io.mockk:mockk:${Versions.MOCKK}"
         const val MOCKK_AGENT_JVM = "io.mockk:mockk-agent-jvm:${Versions.MOCKK}"
@@ -101,6 +105,9 @@ object Dependencies {
 
             // LeakCanary
             const val LEAK_CANARY = "2.8.1"
+
+            // JaCoCo
+            const val JACOCO = "0.8.7"
 
             // Tests
             const val JUNIT = "4.13.2"

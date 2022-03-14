@@ -83,6 +83,9 @@ dependencies {
     // Needed to get an image rotation
     implementation(Dependencies.Libraries.EXIF_INTERFACE)
 
+    // JaCoCo agent
+    implementation(Dependencies.Libraries.JACOCO_AGENT)
+
     // Tests
     addCoreTestLibraries()
 }
