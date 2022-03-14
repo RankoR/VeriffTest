@@ -10,6 +10,7 @@ import com.example.core_ui.util.setOnSingleClickListener
 import com.example.sdk.VeriffSdk
 import com.example.sdk.data.model.face.FaceResult
 import com.example.sdk.data.model.id.TextDocumentResult
+import com.example.sdk.presentation.error.ErrorFragment
 import com.example.testapp.databinding.ActivityMainBinding
 import timber.log.Timber
 import java.io.File

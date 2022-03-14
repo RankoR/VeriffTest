@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.sdk.presentation.error
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.example.core_ui.util.setOnSingleClickListener
-import com.example.testapp.databinding.FragmentErrorBinding
+import com.example.sdk.databinding.FragmentErrorBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ErrorFragment : BottomSheetDialogFragment() {
