@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
-package com.example.sdk
+package com.example.sdk.domain
 
 import com.example.core_tests.BaseInstrumentedTest
 import com.example.core_tests.assertThrows
