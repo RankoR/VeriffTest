@@ -29,11 +29,8 @@ object VeriffSdk {
     var onTextDocumentResult: ((result: TextDocumentResult) -> Unit) = {}
     var onFaceResult: ((result: FaceResult) -> Unit) = {}
 
-    fun initialize(application: Application) {
-        if (isInitialized) {
-            throw IllegalStateException("SDK is already initialized")
-        }
-
+    @Synchronized
+    private fun initialize(application: Application) {
         initializeDi(application)
         initializeLogging()
 
@@ -41,6 +38,10 @@ object VeriffSdk {
     }
 
     fun registerActivity(activity: FragmentActivity) {
+        if (!isInitialized) {
+            initialize(activity.application)
+        }
+
         this.activity = WeakReference(activity)
 
         idRecognitionLauncher = activity.registerForActivityResult(IdRecognitionContract()) { textDocumentResult ->
