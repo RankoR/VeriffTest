@@ -44,3 +44,75 @@ dependencies {
     // Tests
     addCoreTestLibraries()
 }
+
+// tasks.withType<Test> {
+//    configure<JacocoTaskExtension> {
+//        isIncludeNoLocationClasses = true
+//    }
+// }
+
+configurations.all {
+    resolutionStrategy {
+        eachDependency {
+            if ("org.jacoco" == requested.group) {
+                useVersion("0.8.7")
+            }
+        }
+    }
+}
+
+task<JacocoReport>("mergedJacocoReport") {
+    dependsOn("testDebugUnitTest", "createDebugCoverageReport")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val fileFilter = mutableSetOf(
+        "**/R.class",
+        "**/R\$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*",
+        "**/*\$Lambda$*.*", // Jacoco can not handle several "$" in class name.
+        "**/*\$inlined$*.*", // Kotlin specific, Jacoco can not handle several "$" in class name.
+        "**/com/example/sdk/di/DiHolder.class" // Not working for some reason
+    )
+
+    classDirectories.setFrom(
+        fileTree(project.buildDir) {
+            include(
+                "**/classes/**/main/**",
+                "**/intermediates/classes/debug/**",
+                "**/intermediates/javac/debug/*/classes/**", // Android Gradle Plugin 3.2.x support.
+                "**/tmp/kotlin-classes/debug/**"
+            )
+
+            exclude(fileFilter)
+        }
+    )
+
+    sourceDirectories.setFrom(
+        fileTree("${project.buildDir}") {
+            include(
+                "src/main/java/**",
+                "src/main/kotlin/**",
+                "src/debug/java/**",
+                "src/debug/kotlin/**"
+            )
+        }
+    )
+
+    executionData.setFrom(
+        fileTree(project.buildDir) {
+            include(
+                "outputs/code_coverage/**/*.ec",
+                "jacoco/jacocoTestReportDebug.exec",
+                "jacoco/testDebugUnitTest.exec",
+                "jacoco/test.exec"
+            )
+        }
+    )
+}

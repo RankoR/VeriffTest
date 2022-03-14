@@ -20,12 +20,16 @@ private object Dependencies {
         const val GRADLE_VERSIONS = "com.github.ben-manes:gradle-versions-plugin:${Versions.GRADLE_VERSIONS}"
         const val SPOTLESS = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.SPOTLESS}"
 
+        const val JACOCO = "org.jacoco:org.jacoco.core:${Versions.JACOCO}"
+
         private object Versions {
             const val TOOLS_GRADLE = "7.0.4"
             const val KOTLIN = "1.6.10"
 
             const val GRADLE_VERSIONS = "0.39.0"
             const val SPOTLESS = "5.16.0"
+
+            const val JACOCO = "0.8.7"
         }
     }
 }
