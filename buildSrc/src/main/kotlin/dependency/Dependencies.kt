@@ -62,6 +62,9 @@ object Dependencies {
         const val ANDROIDX_TEST_RULES = "androidx.test:rules:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_EXT_JUNIT = "androidx.test.ext:junit:${Versions.ANDROIDX_TEST_EXT_JUNIT}"
         const val ANDROIDX_FRAGMENT_TESTING = "androidx.fragment:fragment-testing:${Versions.ANDROIDX_FRAGMENT_TESTING}"
+        const val MOCKK = "io.mockk:mockk:${Versions.MOCKK}"
+        const val MOCKK_AGENT_JVM = "io.mockk:mockk-agent-jvm:${Versions.MOCKK}"
+        const val MOCKK_ANDROID = "io.mockk:mockk-android:${Versions.MOCKK}"
         const val CORE_TESTS = ":core-tests"
 
         /**
@@ -105,6 +108,7 @@ object Dependencies {
             const val ANDROIDX_TEST = "1.4.0"
             const val ANDROIDX_TEST_EXT_JUNIT = "1.1.3"
             const val ANDROIDX_FRAGMENT_TESTING = "1.4.1"
+            const val MOCKK = "1.12.3"
         }
     }
 }

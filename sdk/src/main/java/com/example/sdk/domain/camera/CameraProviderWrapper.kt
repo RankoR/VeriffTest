@@ -52,7 +52,6 @@ internal class CameraProviderWrapperImpl(
 
             imageCapture = ImageCapture
                 .Builder()
-//                .setTargetRotation(Surface.ROTATION_0)
                 .build()
 
             try {
@@ -99,6 +98,7 @@ internal class CameraProviderWrapperImpl(
 
         override fun release() {
             cameraExecutor.shutdown()
+            imageCapture = null
         }
 
         private fun getOutputFile(): File {

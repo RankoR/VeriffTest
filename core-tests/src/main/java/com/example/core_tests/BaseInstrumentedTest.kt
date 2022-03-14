@@ -29,4 +29,8 @@ abstract class BaseInstrumentedTest {
                 }
             }
     }
+
+    protected fun runOnUiThread(block: () -> Unit) {
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(block)
+    }
 }

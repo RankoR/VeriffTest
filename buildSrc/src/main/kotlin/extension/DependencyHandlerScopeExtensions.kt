@@ -51,6 +51,11 @@ fun DependencyHandlerScope.addCoreTestLibraries() {
     testImplementation(Dependencies.Libraries.KOTLIN_TEST)
     androidTestImplementation(Dependencies.Libraries.KOTLIN_TEST)
 
+    testImplementation(Dependencies.Libraries.MOCKK)
+    testImplementation(Dependencies.Libraries.MOCKK_AGENT_JVM)
+
+    androidTestImplementation(Dependencies.Libraries.MOCKK_ANDROID)
+
     testImplementation(project(Dependencies.Libraries.CORE_TESTS))
     androidTestImplementation(project(Dependencies.Libraries.CORE_TESTS))
 }
