@@ -24,6 +24,9 @@ interface CameraProviderWrapper {
     fun release()
 }
 
+/**
+ * Note: Here are two memory leaks (when you rotate the device), but it seems that it's an in-library leak.
+ */
 internal class CameraProviderWrapperImpl(
     private val context: Context
 ) : CameraProviderWrapper {
@@ -97,6 +100,7 @@ internal class CameraProviderWrapperImpl(
         }
 
         override fun release() {
+            ProcessCameraProvider.getInstance(context).get()?.unbindAll()
             cameraExecutor.shutdown()
             imageCapture = null
         }
