@@ -12,6 +12,10 @@ sealed class FaceResult : Parcelable {
         val faceData: FaceData
     ) : FaceResult()
 
+    /**
+     * TODO: Returning just a text is not the best solution.
+     * We should better return some kind of error class, like enum class FailureType: MissingFace|MultipleFaces|etc
+     */
     @Parcelize
     data class Failure(
         val text: String
