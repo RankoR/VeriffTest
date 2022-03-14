@@ -11,6 +11,8 @@ import com.example.sdk.domain.face.exception.MissingFaceException
 import com.example.sdk.domain.face.interactor.DetectFace
 import com.example.sdk.presentation.face.FaceRecognitionViewModel
 import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.confirmVerified
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -53,6 +55,9 @@ class FaceRecognitionViewModelTest : BaseInstrumentedTest() {
                     assertIs<FaceResult.Success>(result)
 
                     assertEquals(faceData, result.faceData)
+
+                    coVerify { detectFace.exec(File("/")) }
+                    confirmVerified(detectFace)
                 }
         }
     }
@@ -70,6 +75,9 @@ class FaceRecognitionViewModelTest : BaseInstrumentedTest() {
                     assertIs<FaceResult.Failure>(result)
 
                     assertEquals("No face found", result.text)
+
+                    coVerify { detectFace.exec(File("/")) }
+                    confirmVerified(detectFace)
                 }
         }
     }
