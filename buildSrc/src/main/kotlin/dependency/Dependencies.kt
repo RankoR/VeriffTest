@@ -61,6 +61,7 @@ object Dependencies {
         const val ANDROIDX_TEST_RUNNER = "androidx.test:runner:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_RULES = "androidx.test:rules:${Versions.ANDROIDX_TEST}"
         const val ANDROIDX_TEST_EXT_JUNIT = "androidx.test.ext:junit:${Versions.ANDROIDX_TEST_EXT_JUNIT}"
+        const val ANDROIDX_FRAGMENT_TESTING = "androidx.fragment:fragment-testing:${Versions.ANDROIDX_FRAGMENT_TESTING}"
         const val CORE_TESTS = ":core-tests"
 
         /**
@@ -103,6 +104,7 @@ object Dependencies {
             const val ESPRESSO = "3.4.0"
             const val ANDROIDX_TEST = "1.4.0"
             const val ANDROIDX_TEST_EXT_JUNIT = "1.1.3"
+            const val ANDROIDX_FRAGMENT_TESTING = "1.4.1"
         }
     }
 }
