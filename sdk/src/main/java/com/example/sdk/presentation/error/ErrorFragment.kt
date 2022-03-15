@@ -9,10 +9,20 @@ import com.example.core_ui.util.setOnSingleClickListener
 import com.example.sdk.databinding.FragmentErrorBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
+/**
+ * Fragment for displaying the error
+ *
+ * Use [onRetryClick] to get a callback when the «retry» button is clicked
+ *
+ * Current implementation uses [BottomSheetDialogFragment]
+ */
 class ErrorFragment : BottomSheetDialogFragment() {
 
     private var binding: FragmentErrorBinding? = null
 
+    /**
+     * Called when the «retry» button is clicked
+     */
     var onRetryClick: () -> Unit = {}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -45,6 +55,12 @@ class ErrorFragment : BottomSheetDialogFragment() {
 
         private const val ARG_MESSAGE = "message"
 
+        /**
+         * Create [ErrorFragment]. Use fragmentManager.show to display this fragment
+         *
+         * @param message Message to show
+         * @return [ErrorFragment] instance
+         */
         fun newInstance(message: String): ErrorFragment {
             return ErrorFragment().apply {
                 arguments = bundleOf(ARG_MESSAGE to message)
