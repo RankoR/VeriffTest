@@ -110,7 +110,7 @@ I/DEBUG   (10991):     r0 a023ef18  r1 00000400  r2 9fe220dc  r3 9fe127ad
 I/DEBUG   (10991):     r4 a023ef18  r5 b6f9cf73  r6 ac8af7e4  r7 b6f9d03a
 I/DEBUG   (10991):     r8 00000040  r9 b6fa1714  sl 00000001  fp a0234fc8
 I/DEBUG   (10991):     ip b6f9d03a  sp a0353d00  lr 9fffbb6d  pc a00031fa  cpsr 88000030
-I/DEBUG   (10991): 
+I/DEBUG   (10991):
 I/DEBUG   (10991): backtrace:
 I/DEBUG   (10991):     #00 pc 002691fa  /data/app/com.example.sdk.test-2/lib/arm/libface_detector_v2_jni.so
 I/DEBUG   (10991):     #01 pc 00261b69  /data/app/com.example.sdk.test-2/lib/arm/libface_detector_v2_jni.so
