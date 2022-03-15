@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 import kotlin.math.abs
 
 /**
- * Wrapper object for the face detection data
+ * Wrapper for the face detection data
  *
  * @property contours [List] of detected [FaceContour]s
  * @property landmarks [List] of detected [FaceLandmark]s
