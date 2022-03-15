@@ -8,6 +8,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
+/**
+ * ViewModels injection.
+ *
+ * We're using this technique to be able to inject ViewModels constructors.
+ * As if we'll use properties injection, we'll lose the ability to mock this properties.
+ */
 @Module
 abstract class SdkViewModelsModule {
 

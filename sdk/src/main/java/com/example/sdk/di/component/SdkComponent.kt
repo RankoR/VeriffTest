@@ -11,6 +11,9 @@ import dagger.Component
 import timber.log.Timber
 import javax.inject.Singleton
 
+/**
+ * Main dependencies (singleton and reusable)
+ */
 @Component(
     modules = [
         CoreModule::class,
@@ -25,6 +28,9 @@ interface SdkComponent {
 
     val fragmentComponentBuilder: FragmentComponent.Builder
 
+    /**
+     * We can't inject into object (it's used in VeriffSdk object), so providing it as a variable
+     */
     val loggingTree: Timber.Tree
 
     fun inject(activity: IdRecognitionActivity)

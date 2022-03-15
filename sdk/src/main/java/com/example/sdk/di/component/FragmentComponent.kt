@@ -5,6 +5,9 @@ import com.example.sdk.di.module.FragmentModule
 import com.example.sdk.presentation.camera.CameraFragment
 import dagger.Subcomponent
 
+/**
+ * Used in [CameraFragment], scoped to its lifecycle
+ */
 @Subcomponent(
     modules = [
         FragmentModule::class

@@ -9,6 +9,9 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 
+/**
+ * Dependencies related to fragment scope
+ */
 @Module
 class FragmentModule(
     private val context: Context
