@@ -16,10 +16,29 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
 
+/**
+ * Extract text from the photo
+ */
 internal interface ExtractText {
+
+    /**
+     * Execute the extraction flow
+     *
+     * @param file File with image to use for extraction
+     *
+     * @return [Flow] with resulting [RawDocumentData] or [Exception]
+     *
+     * @see RawDocumentData
+     */
     suspend fun exec(file: File): Flow<RawDocumentData>
 }
 
+/**
+ * Text extraction implementation
+ *
+ * @param context Context to use
+ * @property coroutineDispatcher Coroutine dispatcher to use for detection. Use a background dispatcher, preferrably «Default»
+ */
 internal class ExtractTextImpl(
     private val context: Context,
     private val coroutineDispatcher: CoroutineDispatcher
@@ -55,7 +74,7 @@ internal class ExtractTextImpl(
     }
 
     /**
-     * Converting MLKit's model to internal model to get rid of external dependency on the upper levels
+     * Convert MLKit's [TextBlock] to internal model to get rid of external dependency on the upper levels
      * Also useful for cases when we use different implementations
      */
     private fun TextBlock.toInternalBlock(): RawDocumentData.Block? {
@@ -66,6 +85,9 @@ internal class ExtractTextImpl(
         ).takeIf { it.isValid }
     }
 
+    /**
+     * Convert MLKit's [Text.Line] to internal model
+     */
     private fun Text.Line.toInternalLine(): RawDocumentData.Line? {
         return RawDocumentData.Line(
             text = text,
