@@ -11,6 +11,9 @@ import dagger.Reusable
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Named
 
+/**
+ * Dependencies related to face detection
+ */
 @Module
 internal class FaceDetectionModule {
 

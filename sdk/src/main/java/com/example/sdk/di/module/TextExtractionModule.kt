@@ -11,6 +11,9 @@ import dagger.Reusable
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Named
 
+/**
+ * Dependencies related to text extraction
+ */
 @Module
 internal class TextExtractionModule {
 
