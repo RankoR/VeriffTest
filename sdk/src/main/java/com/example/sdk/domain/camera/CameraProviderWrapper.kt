@@ -16,11 +16,39 @@ import timber.log.Timber
 import java.io.File
 import java.util.concurrent.Executors
 
+/**
+ * Wrapper for the CameraX provider
+ *
+ * @property imageFlow Emits the taken photos
+ */
 internal interface CameraProviderWrapper {
     val imageFlow: Flow<File>
 
+    /**
+     * Start the camera provider
+     *
+     * @param cameraType Type of the camera to use
+     * @param surfaceProvider Surface for preview
+     * @param lifecycleOwner Lifecycle owner (for example, view lifecycle owner for fragment)
+     *
+     * @see CameraType
+     * @see SurfaceProvider
+     * @see LifecycleOwner
+     */
     fun start(cameraType: CameraType, surfaceProvider: SurfaceProvider, lifecycleOwner: LifecycleOwner)
+
+    /**
+     * Take picture
+     *
+     * If something is wrong, fails silently
+     *
+     * TODO: Add some error indicator ([Flow] with errors, etc)
+     */
     fun takePicture()
+
+    /**
+     * Release the provider. Call in, for example, Fragment's onDestroy
+     */
     fun release()
 }
 
@@ -78,25 +106,24 @@ internal class CameraProviderWrapperImpl(
                 .Builder(outputFile)
                 .build()
 
-            imageCapture
-                ?.takePicture(
-                    outputFileOptions,
-                    cameraExecutor,
-                    object : ImageCapture.OnImageSavedCallback {
-                        override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                            Timber.d("onImageSaved: ${outputFileResults.savedUri}")
+            imageCapture?.takePicture(
+                outputFileOptions,
+                cameraExecutor,
+                object : ImageCapture.OnImageSavedCallback {
+                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                        Timber.d("onImageSaved: ${outputFileResults.savedUri}")
 
-                            val isEmitted = imageFlow.tryEmit(outputFile)
-                            Timber.d("Is emitted: $isEmitted")
-                        }
-
-                        override fun onError(exception: ImageCaptureException) {
-                            Timber.e(exception, "Failed to take a photo")
-
-                            // TODO: Show error
-                        }
+                        val isEmitted = imageFlow.tryEmit(outputFile)
+                        Timber.d("Is emitted: $isEmitted")
                     }
-                )
+
+                    override fun onError(exception: ImageCaptureException) {
+                        Timber.e(exception, "Failed to take a photo")
+
+                        // TODO: Show error
+                    }
+                }
+            )
         }
 
         override fun release() {
