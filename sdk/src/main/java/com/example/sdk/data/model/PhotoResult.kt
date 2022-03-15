@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 /**
  * Result of taking photo
  */
-sealed class PhotoResult : Parcelable {
+internal sealed class PhotoResult : Parcelable {
 
     /**
      * Photo taken successfully

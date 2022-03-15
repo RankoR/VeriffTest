@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Named
 
 @Module
-class FaceDetectionModule {
+internal class FaceDetectionModule {
 
     @Provides
     @Reusable

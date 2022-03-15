@@ -13,7 +13,7 @@ import javax.inject.Named
  * Dependencies related to fragment scope
  */
 @Module
-class FragmentModule(
+internal class FragmentModule(
     private val context: Context
 ) {
 

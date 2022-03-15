@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
 
-interface DetectFace {
+internal interface DetectFace {
     suspend fun exec(file: File): Flow<FaceData>
 }
 

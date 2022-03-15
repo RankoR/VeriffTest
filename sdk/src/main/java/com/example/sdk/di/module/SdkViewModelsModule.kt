@@ -15,7 +15,7 @@ import dagger.multibindings.IntoMap
  * As if we'll use properties injection, we'll lose the ability to mock this properties.
  */
 @Module
-abstract class SdkViewModelsModule {
+internal abstract class SdkViewModelsModule {
 
     @Binds
     @IntoMap

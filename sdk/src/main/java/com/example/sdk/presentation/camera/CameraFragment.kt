@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding::inflate) {
+internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding::inflate) {
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory

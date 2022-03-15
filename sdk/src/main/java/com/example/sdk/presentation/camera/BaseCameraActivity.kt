@@ -11,7 +11,7 @@ import com.example.sdk.presentation.loading.LoadingFragment
 import timber.log.Timber
 import java.io.File
 
-abstract class BaseCameraActivity<VB : ViewBinding>(
+internal abstract class BaseCameraActivity<VB : ViewBinding>(
     inflate: ActivityInflate<VB>,
     private val cameraType: CameraType
 ) : BaseActivity<VB>(inflate) {

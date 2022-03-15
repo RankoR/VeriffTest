@@ -16,7 +16,7 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
-class IdRecognitionActivity : BaseCameraActivity<ActivityIdRecognitionBinding>(
+internal class IdRecognitionActivity : BaseCameraActivity<ActivityIdRecognitionBinding>(
     ActivityIdRecognitionBinding::inflate,
     CameraType.MAIN
 ) {

@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
 
-interface ExtractText {
+internal interface ExtractText {
     suspend fun exec(file: File): Flow<RawDocumentData>
 }
 

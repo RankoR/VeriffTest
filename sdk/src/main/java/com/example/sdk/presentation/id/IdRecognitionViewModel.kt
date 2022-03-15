@@ -13,7 +13,7 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
-class IdRecognitionViewModel @Inject constructor(
+internal class IdRecognitionViewModel @Inject constructor(
     private val extractText: ExtractText
 ) : BaseViewModel() {
 

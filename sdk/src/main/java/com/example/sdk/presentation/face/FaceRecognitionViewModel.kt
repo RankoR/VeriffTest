@@ -13,7 +13,7 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
-class FaceRecognitionViewModel @Inject constructor(
+internal class FaceRecognitionViewModel @Inject constructor(
     private val detectFace: DetectFace
 ) : BaseViewModel() {
 

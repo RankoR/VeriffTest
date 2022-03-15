@@ -24,7 +24,7 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface SdkComponent {
+internal interface SdkComponent {
 
     val fragmentComponentBuilder: FragmentComponent.Builder
 

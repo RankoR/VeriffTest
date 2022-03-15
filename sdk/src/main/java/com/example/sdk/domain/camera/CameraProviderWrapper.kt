@@ -16,7 +16,7 @@ import timber.log.Timber
 import java.io.File
 import java.util.concurrent.Executors
 
-interface CameraProviderWrapper {
+internal interface CameraProviderWrapper {
     val imageFlow: Flow<File>
 
     fun start(cameraType: CameraType, surfaceProvider: SurfaceProvider, lifecycleOwner: LifecycleOwner)

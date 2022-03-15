@@ -3,7 +3,7 @@ package com.example.sdk.data.model
 /**
  * Camera selector
  */
-enum class CameraType {
+internal enum class CameraType {
     /**
      * Main camera (back)
      */

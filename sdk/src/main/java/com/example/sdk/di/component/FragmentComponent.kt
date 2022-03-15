@@ -14,7 +14,7 @@ import dagger.Subcomponent
     ]
 )
 @FragmentScope
-interface FragmentComponent {
+internal interface FragmentComponent {
 
     fun inject(fragment: CameraFragment)
 
