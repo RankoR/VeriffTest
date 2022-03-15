@@ -60,9 +60,11 @@ object VeriffSdk {
     }
 
     /**
-     * Call this method in every activity, where you plan to launch the verification flows.
+     * Call this method in every [Activity], where you plan to launch the verification flows.
      *
-     * If you'll not call it, flows won't be launched
+     * If you'll not call it at all, [IllegalStateException] would be thrown on flow launch
+     *
+     * If you call it, but not called for the active [Activity], flows won't be launched silently
      *
      * @param activity [FragmentActivity] to register
      */
@@ -89,9 +91,13 @@ object VeriffSdk {
      *
      * After the flow is complete (or cancelled) you'll get [onTextDocumentResult] callback invoked
      *
+     * @throws IllegalStateException if the SDK was not initialized
+     *
      * @see onTextDocumentResult
      */
     fun launchIdRecognition() {
+        checkInitialization()
+
         idRecognitionLauncher?.launch(Unit)
     }
 
@@ -100,10 +106,30 @@ object VeriffSdk {
      *
      * After the flow is complete (or cancelled) you'll get [onFaceResult] callback invoked
      *
+     * @throws IllegalStateException if the SDK was not initialized
+     *
      * @see onFaceResult
      */
     fun launchFaceRecognition() {
+        checkInitialization()
+
         faceRecognitionLauncher?.launch(Unit)
+    }
+
+    /**
+     * Checks if SDK was initialized and throws [IllegalStateException] if not.
+     *
+     * Note that in case when SDK was initialized, but the [Activity] is not active, launches will fail silently
+     *
+     * @throws IllegalStateException if SDK is not initialized
+     *
+     * @see registerActivity
+     * @see initialize
+     */
+    private fun checkInitialization() {
+        if (!isInitialized) {
+            throw IllegalStateException("Call registerActivity() first")
+        }
     }
 
     /**
