@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 
+/**
+ * ViewModel-related stuff
+ */
 @Module
 abstract class ViewModelModule {
 

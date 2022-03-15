@@ -9,12 +9,23 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
+/**
+ * Base view model
+ */
 abstract class BaseViewModel : ViewModel() {
 
     private val _showErrorMessage = Channel<String>(capacity = 1)
+
+    /**
+     * Error messages flow
+     */
     internal val showErrorMessage = _showErrorMessage.receiveAsFlow()
 
     private val _showLoading = MutableStateFlow(false)
+
+    /**
+     * Loading state flow
+     */
     internal val showLoading = _showLoading.asStateFlow()
 
     open fun showErrorMessage(message: String) {
@@ -25,16 +36,6 @@ abstract class BaseViewModel : ViewModel() {
 
     open fun showErrorMessage(throwable: Throwable) {
         showErrorMessage(throwable.message.orEmpty())
-    }
-
-    protected inline fun <T> Result<T>.onFailureShowErrorMessage(
-        crossinline transform: (t: Throwable) -> String = {
-            it.message ?: it.toString()
-        }
-    ): Result<T> {
-        return this.onFailure { t ->
-            transform(t).let(::showErrorMessage)
-        }
     }
 
     protected open fun setIsLoading(isLoading: Boolean) {

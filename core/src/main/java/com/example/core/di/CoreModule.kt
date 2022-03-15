@@ -15,6 +15,9 @@ import timber.log.Timber
 import javax.inject.Named
 import javax.inject.Singleton
 
+/**
+ * Module containing the core dependencies
+ */
 @Module
 class CoreModule(
     private val application: Application

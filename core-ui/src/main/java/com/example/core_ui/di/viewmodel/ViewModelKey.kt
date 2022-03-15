@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
 
+/**
+ * Used for finding the [ViewModel]s in their holder
+ */
 @Target(
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY_GETTER,
