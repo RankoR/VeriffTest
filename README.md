@@ -28,6 +28,13 @@ Add the following activities to the `AndroidManifest.xml`:
     android:exported="false"/>
 ```
 
+Add the `CAMERA` permission and the camera requirement to the `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-feature android:name="android.hardware.camera.any"/>
+```
+
 In the `Activity` (or activities) you're going to use the SDK, call `registerActivity` after the activity is created:
 
 ```kotlin
