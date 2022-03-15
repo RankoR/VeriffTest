@@ -24,7 +24,7 @@ sealed class FaceResult : Parcelable {
     ) : FaceResult()
 
     /**
-     * Face detection failed, probable reasons: no faces, multiple faces, eyes closed, head rotated too much
+     * Face detection failed, possible reasons: no faces, multiple faces, eyes closed, head rotated too much
      *
      * @property text Error message
      *
