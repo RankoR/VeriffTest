@@ -13,11 +13,20 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * Performs photo analysis for face detection
+ *
+ * @property detectFace [DetectFace] implementation
+ */
 internal class FaceRecognitionViewModel @Inject constructor(
     private val detectFace: DetectFace
 ) : BaseViewModel() {
 
     private val _faceResult = MutableSharedFlow<FaceResult>()
+
+    /**
+     * Emits [FaceResult] when the analysis is complete
+     */
     val faceResult: Flow<FaceResult> = _faceResult.asSharedFlow()
 
     fun onGotPhoto(file: File) {

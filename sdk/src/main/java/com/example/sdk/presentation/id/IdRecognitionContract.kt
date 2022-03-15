@@ -7,6 +7,9 @@ import androidx.activity.result.contract.ActivityResultContract
 import com.example.sdk.VeriffSdk
 import com.example.sdk.data.model.id.TextDocumentResult
 
+/**
+ * Used to launch [IdRecognitionActivity] and return the result of its work
+ */
 internal class IdRecognitionContract : ActivityResultContract<Unit, TextDocumentResult>() {
 
     override fun createIntent(context: Context, input: Unit?): Intent {

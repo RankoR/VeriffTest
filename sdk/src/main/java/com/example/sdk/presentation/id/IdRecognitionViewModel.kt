@@ -13,11 +13,20 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * Performs photo analysis for ID text extraction
+ *
+ * @property extractText [ExtractText] implementation
+ */
 internal class IdRecognitionViewModel @Inject constructor(
     private val extractText: ExtractText
 ) : BaseViewModel() {
 
     private val _documentResult = MutableSharedFlow<TextDocumentResult>()
+
+    /**
+     * Emits [TextDocumentResult] when the analysis is complete
+     */
     val documentResult: Flow<TextDocumentResult> = _documentResult.asSharedFlow()
 
     fun onGotPhoto(file: File) {

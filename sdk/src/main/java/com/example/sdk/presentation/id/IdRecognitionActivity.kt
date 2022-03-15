@@ -16,6 +16,9 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * Used for text extraction
+ */
 internal class IdRecognitionActivity : BaseCameraActivity<ActivityIdRecognitionBinding>(
     ActivityIdRecognitionBinding::inflate,
     CameraType.MAIN

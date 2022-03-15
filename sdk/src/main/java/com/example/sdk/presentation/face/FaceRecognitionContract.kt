@@ -7,6 +7,9 @@ import androidx.activity.result.contract.ActivityResultContract
 import com.example.sdk.VeriffSdk
 import com.example.sdk.data.model.face.FaceResult
 
+/**
+ * Used to launch [FaceRecognitionActivity] and return the result of its work
+ */
 internal class FaceRecognitionContract : ActivityResultContract<Unit, FaceResult>() {
 
     override fun createIntent(context: Context, input: Unit?): Intent {

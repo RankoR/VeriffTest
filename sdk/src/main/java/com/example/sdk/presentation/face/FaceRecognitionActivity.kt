@@ -17,6 +17,9 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
+/**
+ * Used for face recognition
+ */
 internal class FaceRecognitionActivity : BaseCameraActivity<ActivityFaceRecognitionBinding>(
     ActivityFaceRecognitionBinding::inflate,
     CameraType.FRONT
