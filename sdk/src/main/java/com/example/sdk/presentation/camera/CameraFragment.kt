@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.core.domain.ArePermissionsGranted
 import com.example.core_ui.presentation.BaseFragment
@@ -22,10 +21,10 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Fragment with a camera preview
+ */
 internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding::inflate) {
-
-    @Inject
-    protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
     protected lateinit var arePermissionsGranted: ArePermissionsGranted
@@ -33,8 +32,12 @@ internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCame
     @Inject
     protected lateinit var cameraProviderWrapper: CameraProviderWrapper
 
+    /**
+     * Camera to use
+     */
     private lateinit var cameraType: CameraType
 
+    // TODO: ViewModel is not yet used in this fragment
     override val viewModel: BaseViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +70,9 @@ internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCame
         }
     }
 
+    /**
+     * Check if camera permission is granted and start the camera if so
+     */
     private fun checkPermissionsAndStart() {
         if (arePermissionsGranted.exec(Manifest.permission.CAMERA)) {
             startCamera()
@@ -75,10 +81,16 @@ internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCame
         }
     }
 
+    /**
+     * Request the camera permission
+     */
     private fun requestPermissions() {
         requestPermissionLauncher.launch(Manifest.permission.CAMERA)
     }
 
+    /**
+     * Initialize the camera and start the preview
+     */
     private fun startCamera() {
         binding
             ?.previewView
@@ -120,6 +132,9 @@ internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCame
         }
     }
 
+    /**
+     * Take the photo
+     */
     private fun takePhoto() {
         cameraProviderWrapper.takePicture()
     }
@@ -141,7 +156,10 @@ internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCame
         if (isGranted) {
             checkPermissionsAndStart()
         } else {
-            // TODO: Show dialog
+            // TODO: Add permission denied flow
+            // I didn't add it as:
+            // 1. It's an UX decision (we have multiple options: show rationale, send user to settings, etc)
+            // 2. I just don't have much time for it
         }
     }
 
@@ -158,6 +176,11 @@ internal class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCame
         const val PHOTO_REQUEST_KEY = "photo_request"
         const val PHOTO_RESULT_KEY = "photo_result"
 
+        /**
+         * Create the camera fragment
+         *
+         * @param cameraType Camera to use
+         */
         fun newInstance(cameraType: CameraType): CameraFragment {
             return CameraFragment().apply {
                 arguments = bundleOf(ARG_CAMERA_TYPE to cameraType.ordinal)

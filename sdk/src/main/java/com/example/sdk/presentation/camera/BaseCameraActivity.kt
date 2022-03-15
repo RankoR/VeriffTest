@@ -11,13 +11,30 @@ import com.example.sdk.presentation.loading.LoadingFragment
 import timber.log.Timber
 import java.io.File
 
+/**
+ * Base activity that can be used to take a photo
+ *
+ * Call [startCameraFlow] to launch the photo flow.
+ *
+ * After taking a photo [onGotPhoto] is called.
+ *
+ * @param cameraType Type of the camera to use
+ */
 internal abstract class BaseCameraActivity<VB : ViewBinding>(
     inflate: ActivityInflate<VB>,
     private val cameraType: CameraType
 ) : BaseActivity<VB>(inflate) {
 
+    /**
+     * View id of the container view for a fragments
+     */
     protected abstract val fragmentContainerId: Int
 
+    /**
+     * Called when photo is taken
+     *
+     * @param file File with a photo
+     */
     abstract fun onGotPhoto(file: File)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +59,20 @@ internal abstract class BaseCameraActivity<VB : ViewBinding>(
         }
     }
 
+    /**
+     * Start the camera flow.
+     *
+     * After this call [CameraFragment] is added to the fragment manager
+     */
     protected fun startCameraFlow() {
         supportFragmentManager.commit {
             replace(fragmentContainerId, CameraFragment.newInstance(cameraType))
         }
     }
 
+    /**
+     * Show loading indicator
+     */
     protected fun showLoading() {
         supportFragmentManager.commit {
             replace(fragmentContainerId, LoadingFragment.newInstance())
