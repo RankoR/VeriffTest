@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Test App</string>
+
+    <string name="title_message_cancelled">You\'ve cancelled the operation\nDo you like to retry?</string>
 </resources>

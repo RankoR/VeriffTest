@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.testapp">
+          package="com.example.testapp">
+
+    <uses-feature android:name="android.hardware.camera.any"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.camera.any" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -14,19 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestApp">
 
-        <meta-data
-            android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="ocr" />
-        <!-- To use multiple models: android:value="ocr,model2,model3" -->
-
-        <activity android:name=".CameraActivity"/>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- SDK Activities -->
+
+        <activity
+            android:name="com.example.sdk.presentation.id.IdRecognitionActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name="com.example.sdk.presentation.face.FaceRecognitionActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
