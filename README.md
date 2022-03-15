@@ -93,6 +93,8 @@ There are some trade-offs in this project, as I have a very limited time for the
 Some of them:
 
 * UI tests are incomplete. To fix it we have to somehow fake the camera
+* On some emulators cameras do not work. Didn't check on real devices lower than 11 as I don't have one
+* Due to the previous issue, tests may fail
 * Working with camera can be implemented in a better way. It also has two leaks, but seems that they're caused by the CameraX itself
 * SDK returns only text messages with error, as it's impossible to put a `Throwable` in a parcel. The better way is to make a `sealed class Error` with possible error causes.
 * DI isn't internal in `core` and `core-ui` modules, so it's available for the external modules
