@@ -20,10 +20,28 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
 
+/**
+ * Detect the face on the photo
+ */
 internal interface DetectFace {
+
+    /**
+     * Execute the detection flow
+     *
+     * @param file File with image to use for detection
+     * @return [Flow] with resulting [FaceData] or [Exception]
+     *
+     * @see FaceData
+     */
     suspend fun exec(file: File): Flow<FaceData>
 }
 
+/**
+ * Face detection implementation
+ *
+ * @param context Context to use
+ * @property coroutineDispatcher Coroutine dispatcher to use for detection. Use a background dispatcher, preferrably «Default»
+ */
 internal class DetectFaceImpl(
     private val context: Context,
     private val coroutineDispatcher: CoroutineDispatcher
@@ -76,6 +94,9 @@ internal class DetectFaceImpl(
         }.flowOn(coroutineDispatcher)
     }
 
+    /**
+     * Convert MLKit's [Face] to an internal model
+     */
     private fun Face.toInternalFaceData(): FaceData {
         return FaceData(
             contours = allContours.mapNotNull { it.toInternalModel() },
@@ -90,6 +111,9 @@ internal class DetectFaceImpl(
         )
     }
 
+    /**
+     * Convert MLKit's [FaceContour] to an internal model
+     */
     private fun FaceContour.toInternalModel(): FaceData.FaceContour? {
         val type = when (faceContourType) {
             FaceContour.FACE -> FaceData.FaceContour.Type.FACE
@@ -115,6 +139,9 @@ internal class DetectFaceImpl(
         )
     }
 
+    /**
+     * Convert MLKit's [FaceLandmark] to an internal model
+     */
     private fun FaceLandmark.toInternalModel(): FaceData.FaceLandmark? {
         val type = when (landmarkType) {
             FaceLandmark.MOUTH_BOTTOM -> FaceData.FaceLandmark.Type.MOUTH_BOTTOM
